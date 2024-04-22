@@ -1,8 +1,5 @@
 package com.Web.controller;
 
-import com.Web.entity.vo.MessageModel;
-import com.Web.service.UserService;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -15,7 +12,7 @@ public class logoutServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         //从session域中移除对象
         HttpSession session = request.getSession();
-        session.removeAttribute("user");
+        session.invalidate();
         response.sendRedirect("home.jsp");
     }
 }
