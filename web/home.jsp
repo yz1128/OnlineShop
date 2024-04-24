@@ -1,3 +1,4 @@
+<%@ page import="com.Web.entity.User" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh">
@@ -141,17 +142,30 @@
 <%--  --%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/jquery-3.7.1.js"></script>
+<!-- TODO(Yanz,2024/4/24 上午12:20): -->
+<!-- TODO(Yanz,2024/4/24 下午4:06): -->
+<%
+    User user = (User) session.getAttribute("user");
+    String userName = null;
+    if (user != null) {
+        userName = user.getUserName();
+    }
+%>
+
 <script>
     $(document).ready(function() {
-        if (userName !== "") {
-                $("#userinfo").text(userName); // 更新导航栏中的用户名
-                $(".dropdown-menu .dropdown-item:contains('退出')").show(); // 显示退出按钮
-                $(".dropdown-menu .dropdown-item:contains('登录')").hide(); // 隐藏登录按钮
-          } else {
-                $("#userinfo").text("未登录"); // 更新导航栏中的文本为"未登录"
-                $(".dropdown-menu .dropdown-item:contains('退出')").hide(); // 隐藏退出按钮
-                $(".dropdown-menu .dropdown-item:contains('登录')").show(); // 显示登录按钮
-          }
+        var userName = "<%= userName %>"; // 将用户名传递给 JavaScript 变量
+        <% System.out.println(userName);%>
+        if (userName!=null) {
+            $("#userinfo").text(userName); // 更新导航栏中的用户名
+            $(".dropdown-menu .dropdown-item:contains('退出')").show(); // 显示退出按钮
+            $(".dropdown-menu .dropdown-item:contains('登录')").hide(); // 隐藏登录按钮
+            // 这里可以放置其他需要执行的 JavaScript 代码
+           } else {
+            $("#userinfo").text("未登录"); // 更新导航栏中的文本为"未登录"
+            $(".dropdown-menu .dropdown-item:contains('退出')").hide(); // 隐藏退出按钮
+            $(".dropdown-menu .dropdown-item:contains('登录')").show(); // 显示登录按钮
+        }
     });
 </script>
 

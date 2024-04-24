@@ -1,5 +1,8 @@
 package com.Web.controller;
 
+import com.Web.entity.vo.MessageModel;
+import com.Web.service.UserService;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -9,10 +12,10 @@ import java.io.IOException;
 public class logoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         //从session域中移除对象
         HttpSession session = request.getSession();
         session.removeAttribute("user");
-        response.sendRedirect("asd.jsp");
-//        fdsa
+        response.sendRedirect("home.jsp");
     }
 }

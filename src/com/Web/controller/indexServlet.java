@@ -13,13 +13,13 @@ public class indexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+// System.out.printf(user.getUserName());
         if (user == null) {
             response.sendRedirect("login.jsp");
         }else {
-            response.sendRedirect("asd.jsp");
+            response.sendRedirect("home.jsp");
         }
     }
 }

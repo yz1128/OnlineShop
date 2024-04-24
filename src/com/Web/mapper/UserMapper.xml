@@ -13,5 +13,5 @@
         VALUES (#{userName}, #{userPassword}, #{userEmail}, #{userAddress}, #{userPhone})
     </insert>
 
-<!--    <insert id="query"-->
+<!-- insert id="query" -->
 </mapper>

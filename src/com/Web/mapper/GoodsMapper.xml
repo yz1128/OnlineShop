@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 首先来解析 namespace：命名空间，此属性通常用来映射Dao(mapper)层接口 -->
+<mapper namespace="com.Web.mapper.GoodsMapper">
+    <!-- id:对应Dao(mapper)层接口方法名 parameterType：指定输入类型 -->
+    <!-- useGeneratedKeys="ture" 把新增加的主键赋值到自己定义的keyProperty(id)中 -->
+    <select id="selectByGoodsName" parameterType="String" resultType="com.Web.entity.Goods">
+        select * from goods where goodsName like CONCAT('%', #{goodsName}, '%')
+    </select>
+
+    <select id="selectByGoodsId" parameterType="String" resultType="com.Web.entity.Goods">
+        select * from goods where goodsId = #{goodsName}
+    </select>
+
+    <!-- 切换商品上架状态 -->
+    <update id="updateGoodsStateById" parameterType="com.Web.entity.Goods">
+        UPDATE goods SET goodsState = #{newState} WHERE goodsId = #{goodsId}
+    </update>
+
+    <insert id="insertGoods" parameterType="com.Web.entity.Goods">
+        INSERT INTO goods (goodsId, goodsName, category, unitPrice, stock, factory, image, addTime, goodsState)
+        VALUES (#{goodsId}, #{goodsName}, #{category}, #{unitPrice}, #{stock},#{factory}, #{image}, #{addTime}, #{goodsState})
+    </insert>
+
+<!-- insert id="query" -->
+</mapper>
