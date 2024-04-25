@@ -1,17 +1,40 @@
-/* styles.css */
-
-    /* 导航栏样式 */
-
+/* 导航栏样式 */
+.dropdown-menu{
+    background-color:rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))!important;
+    --bs-dropdown-min-width: 1rem;
+}
+.dropdown-item{
+    color: rgba(255, 255, 255, 0.55);
+}
 
 
 /* 商品展示样式 */
 .shop{
     display: block;
-    margin: 10px auto 0px;
+    margin: 10px auto ;
     width: 1200px;
-    /*background-color: #d7d4d4;*/
 }
-
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.product {
+    width: 200px;
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.product img {
+    width: 100%;
+    border-radius: 5px;
+}
+.product h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    text-align: center;
+}
 
 
 /* 底部信息样式 */

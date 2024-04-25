@@ -19,8 +19,8 @@
 
 <%--网页内容--%>
 <div class="center">
-    <form action="updatePasswordServlet" method="post">
-        <table>
+    <form class="form" action="updatePasswordServlet" method="post">
+        <table class="table" >
             <tr>
                 <td></td>
                 <td><h2>密码修改</h2></td>

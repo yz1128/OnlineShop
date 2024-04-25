@@ -7,8 +7,8 @@
 <body>
     <%@include file="head.jsp"%>
         <div class="center">
-            <form action="login" method="post" id="loginForm">
-                <table>
+            <form class="form1" action="login" method="post" id="loginForm">
+                <table class="table">
                     <tr>
                         <td></td>
                         <td><h2>用户登录</h2></td>

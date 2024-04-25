@@ -5,18 +5,8 @@
     <title></title>
     <link href="css/bootstrap.min5.3.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-        .dropdown-menu{
-            background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
-            width: auto;
-        }
-        .dropdown-item{
-            width: auto;
-        }
-    </style>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.jsp">网上商城</a>
@@ -47,23 +37,22 @@
                     <a class="nav-link" href="#">关于我们</a>
                 </li>
             </ul>
-            <form action="#" method="post" class="d-flex">
+            <form action="#" method="post" class="d-flex" style="margin-bottom: 0">
                 <input  class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            <!-- TODO(Yanz,2024/4/25 下午6:35): bug-->
-            <div class="navbar navbar-expand-lg navbar-dark bg-dark nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="userinfo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    用户名
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="userinfo">
-                    <li><a class="dropdown-item" href="http://localhost:80/Web/userInfoUpdate">用户信息</a></li>
-                    <li><a class="dropdown-item" href="#">设置</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:80/Web/login.jsp">登录</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:80/Web/logout">退出</a></li>
-                </ul>
-            </div>
-            <ul class="navbar-nav  mb-2 mb-lg-0">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userinfo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        用户名
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="userinfo">
+                        <li><a class="dropdown-item" href="http://localhost:80/Web/userInfoUpdate">用户信息</a></li>
+                        <li><a class="dropdown-item" href="#">设置</a></li>
+                        <li><a class="dropdown-item" href="http://localhost:80/Web/login.jsp">登录</a></li>
+                        <li><a class="dropdown-item" href="http://localhost:80/Web/logout">退出</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="car.jsp">购物车</a>
                 </li>

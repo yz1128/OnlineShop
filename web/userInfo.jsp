@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>用户信息</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min5.3.css" rel="stylesheet">
     <link rel="stylesheet" href="css/table.css">
 </head>
 <body>
@@ -20,8 +20,8 @@
 
 <!-- 用户信息 -->
 <div class="center">
-    <form action="infoUpdateServlet" method="post">
-        <table>
+    <form class="form" action="infoUpdateServlet" method="post">
+        <table class="table" >
             <tr>
                 <td></td>
                 <td><h2>信息修改</h2></td>
