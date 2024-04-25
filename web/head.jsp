@@ -3,7 +3,7 @@
 <html>
 <head>
     <title></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min5.3.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <style>
         .dropdown-menu{
@@ -51,7 +51,8 @@
                 <input  class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            <div class="nav-item dropdown">
+            <!-- TODO(Yanz,2024/4/25 下午6:35): bug-->
+            <div class="navbar navbar-expand-lg navbar-dark bg-dark nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="userinfo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     用户名
                 </a>
@@ -72,7 +73,7 @@
 </nav>
 
 <!--  -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/bootstrap.bundle.min5.3.js"></script>
 <script src="js/jquery-3.7.1.js"></script>
 
 <%
