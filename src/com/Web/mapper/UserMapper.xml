@@ -13,5 +13,19 @@
         VALUES (#{userName}, #{userPassword}, #{userEmail}, #{userAddress}, #{userPhone})
     </insert>
 
+    <update id="updateUserInfo" parameterType="com.Web.entity.User">
+        UPDATE user
+        SET userEmail = #{userEmail},
+            userAddress = #{userAddress},
+            userPhone = #{userPhone}
+        WHERE userName = #{userName};
+    </update>
+
+    <update id="updateUserPassword" parameterType="com.Web.entity.User">
+        UPDATE user
+        SET userPassword = #{newUserPassword1}
+        WHERE userName = #{userName};
+    </update>
+
 <!-- insert id="query" -->
 </mapper>

@@ -8,4 +8,6 @@ import com.Web.entity.User;
 public interface UserMapper {
     public User queryUserByName(String userName);
     public int insertUser(User user);
+    public int updateUserInfo(User user);
+    public int updateUserPassword(User user);
 }

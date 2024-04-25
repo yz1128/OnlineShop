@@ -1,0 +1,17 @@
+.head{
+    margin-top: 240px;
+}
+.right{
+    text-align: right;
+    width: 120px;
+}
+.center {
+    margin: auto;
+    width: 20%;
+}
+table{
+    width: 360px;
+}
+form{
+    width: 360px;
+}

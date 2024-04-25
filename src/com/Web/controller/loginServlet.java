@@ -13,14 +13,13 @@ import java.io.IOException;
 public class loginServlet extends HttpServlet {
 
     // 实例化UserService对象
-    private final UserService userService = new UserService();
+    private UserService userService = new UserService();
 
     /**
      * 处理用户登录请求
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 避免在生产环境中打印敏感信息
         // String userName = request.getParameter("userName");
         // String userPassword = request.getParameter("userPassword");
@@ -63,8 +62,7 @@ public class loginServlet extends HttpServlet {
 
     // 改动：添加doGet方法以处理非法的GET请求
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "GET method is not supported for login.");
     }
 }

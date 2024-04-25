@@ -1,17 +1,7 @@
 /* styles.css */
 
     /* 导航栏样式 */
-.navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: left;
-}
-.navbar a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
-}
+
 
 
 /* 商品展示样式 */
@@ -21,53 +11,7 @@
     width: 1200px;
     /*background-color: #d7d4d4;*/
 }
-.lunbo{
-    /*display: block;*/
-    margin: 0px auto;
-    /*padding-top: 20px;*/
-    width: 1100px;
-    border: 1px solid #0a3b86;
-    height: 414px;
-    overflow: hidden;
-    position: relative;
-}
-#lunbo{
-    display: flex;
-    float:left;
-    position: relative;
-}
 
-.product-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.product {
-    width: 200px;
-    margin: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-.product img {
-    width: 100%;
-    border-radius: 5px;
-}
-.product h3 {
-    margin-top: 10px;
-    font-size: 18px;
-    text-align: center;
-}
 
 
 /* 底部信息样式 */
-.footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-    position: static;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}

@@ -13,6 +13,6 @@ public class logoutServlet extends HttpServlet {
         //从session域中移除对象
         HttpSession session = request.getSession();
         session.invalidate();
-        response.sendRedirect("home.jsp");
+        response.sendRedirect("index.jsp");
     }
 }

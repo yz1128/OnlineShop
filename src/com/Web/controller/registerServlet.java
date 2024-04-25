@@ -43,7 +43,6 @@ public class registerServlet extends HttpServlet {
         String userAddress = request.getParameter("userAddress");
         String userPhone = request.getParameter("userPhone");
 
-        System.out.println(userName + userPassword + ConfirmPassword + userEmail + userAddress + userPhone);
         //２.调用service层的方法，返回消息模型对象
         MessageModel messageModel = userService.userRegister(userName,userPassword,ConfirmPassword,userEmail,userAddress,userPhone);
         //3.判断消息模型状态码

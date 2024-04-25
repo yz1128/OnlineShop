@@ -13,21 +13,6 @@ import java.util.Objects;
  * 业务逻辑
  */
 public class UserService {
-    /**
-     * 用户登录
-     * 1.参数的非空判断
-     *      如果参数为空
-     *          将状态码、提示信息、回想数据设置到消息模型中，返回消息模型对象
-     * 2.调用dao层的查询方法，通过用户名查询用户对象
-     * 3.判断用户对象是否为空
-     *      将状态码、提示信息、回想数据设置到消息模型中，返回消息模型对象
-     * 4.判断数据库中查询到的用户密码与前台传递的密码作比较
-     *      如果不相等，将状态码、提示信息、回显数据设置到消息模型对象中，返回消息模型对象
-     * 5.登录成功，成功状态、提示信息、用户对象设置消息模型对象，并return
-     * @param userName
-     * @param userPassword
-     * @return
-     */
     public MessageModel userLogin(String userName, String userPassword) {
         MessageModel messageModel = new MessageModel();
 
@@ -128,7 +113,100 @@ public class UserService {
         } finally {
             session.close();
         }
+        return messageModel;
+    }
+    public MessageModel userInfoUpdate(String userName, String userEmail, String userAddress, String userPhone) {
+        MessageModel messageModel = new MessageModel();
 
+        // 回显数据
+        User u = new User();
+        u.setUserName(userName);
+        u.setUserEmail(userEmail);
+        u.setUserAddress(userAddress);
+        u.setUserPhone(userPhone);
+        messageModel.setObject(u);
+        System.out.println("ConfirmPassword："+u.getConfirmPassword());
+        // 1. 参数的非空判断
+        if (StringUtil.isEmpty(userEmail) || StringUtil.isEmpty(userAddress) || StringUtil.isEmpty(userPhone)) {
+            messageModel.setCode(0);
+            messageModel.setMsg("信息不能为空！");
+            return messageModel;
+        }
+        SqlSession session = GetSqlSession.createSqlSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        try {
+            int rowsAffected = userMapper.updateUserInfo(u);
+            session.commit();
+            if (rowsAffected > 0) {
+                messageModel.setCode(1);
+                messageModel.setMsg("修改成功！");
+            } else {
+                messageModel.setCode(0);
+                messageModel.setMsg("修改失败，请稍后重试！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            messageModel.setCode(0);
+            messageModel.setMsg("修改失败，发生异常：" + e.getMessage());
+        } finally {
+            session.close();
+        }
+        return messageModel;
+    }
+    public MessageModel updatePassword(String userName,String userPassword,String newUserPassword1,String newUserPassword2) {
+        MessageModel messageModel = new MessageModel();
+
+        //回显数据
+        User u = new User();
+        u.setUserName(userName);
+        u.setUserPassword(userPassword);
+        u.setNewUserPassword1(newUserPassword1);
+        u.setNewUserPassword2(newUserPassword2);
+        messageModel.setObject(u);
+        // 1. 参数的非空判断
+        if (StringUtil.isEmpty(userPassword) || StringUtil.isEmpty(newUserPassword1) || StringUtil.isEmpty(newUserPassword2)) {
+            //将状态码、提示信息、回想数据设置到消息模型中，返回消息模型对象
+            messageModel.setCode(0);
+            messageModel.setMsg("密码不能为空！");
+            return messageModel;
+        }
+
+        // 2.调用dao层的查询方法，通过用户名查询用户对象
+        SqlSession session = GetSqlSession.createSqlSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        User user = userMapper.queryUserByName(userName);
+
+        //4.判断数据库中查询到的用户密码与前台传递的密码作比较
+        if (!userPassword.equals(user.getUserPassword())) {
+            //如果不相等，将状态码、提示信息、回显数据设置到消息模型对象中，返回消息模型对象
+            messageModel.setCode(0);
+            messageModel.setMsg("用户密码不正确！");
+            return messageModel;
+        } else if (!newUserPassword1.equals(newUserPassword2)) {
+            messageModel.setCode(0);
+            messageModel.setMsg("两次密码不相同！");
+            return messageModel;
+        }
+        //判断消息模型状态码
+        try {
+            int rowsAffected = userMapper.updateUserPassword(u);
+            System.out.println(rowsAffected);
+            session.commit();
+            if (rowsAffected > 0) {
+                messageModel.setCode(1);
+                messageModel.setMsg("修改成功！");
+            } else {
+                messageModel.setCode(0);
+                messageModel.setMsg("修改失败，请稍后重试！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            messageModel.setCode(0);
+            messageModel.setMsg("修改失败，发生异常：" + e.getMessage());
+        } finally {
+            session.close();
+        }
         return messageModel;
     }
 }
+

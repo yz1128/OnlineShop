@@ -2,69 +2,50 @@
 <html>
 <head>
     <title>登录界面</title>
+    <link rel="stylesheet" href="css/table.css">
 </head>
-<style>
-    .head{
-        margin-top: 240px;
-    }
-    .right{
-        text-align: right;
-        width: 120px;
-    }
-    .center {
-        margin: auto;
-        width: 20%;
-    }
-    table{
-        width: 360px;
-    }
-    form{
-        width: 360px;
-    }
-
-</style>
 <body>
-<div style="text-align: center">
-    <div class="head"></div>
-    <div class="center">
-        <form action="login" method="post" id="loginForm">
-            <table>
-                <tr>
-                    <td></td>
-                    <td><h2>用户登录</h2></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="right"><label for="userName">用户名：</label> </td>
-                    <td><input type="text" name="userName" id="userName" value="${messageModel.object.userName}"> </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="right"><label for="userPassword">密码：</label> </td>
-                    <td><input type="password" name="userPassword" id="userPassword" value="${messageModel.object.userPassword}"> </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="text-align: center">
-                        <span id="msg" style="font-size: 12px;color: red"> ${messageModel.msg}</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <button type="button" id="loginBtn">立即登录</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        没有账号?<a href="register.jsp">&nbsp;注册</a>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</div>
+    <%@include file="head.jsp"%>
+        <div class="center">
+            <form action="login" method="post" id="loginForm">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td><h2>用户登录</h2></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="right"><label for="userName">用户名：</label> </td>
+                        <td><input type="text" name="userName" id="userName" value="${messageModel.object.userName}"> </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="right"><label for="userPassword">密码：</label> </td>
+                        <td><input type="password" name="userPassword" id="userPassword" value="${messageModel.object.userPassword}"> </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center">
+                            <span id="msg" style="font-size: 12px;color: red"> ${messageModel.msg}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="button" id="loginBtn">立即登录&nbsp;&nbsp;</button>
+                            <a style="font-size: 12px" href="updatePassword.jsp">忘记密码</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            没有账号?<a href="register.jsp">&nbsp;注册</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    <%@include file="footer.jsp"%>
 </body>
 <%--引入Jquery的js文件--%>
 <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
@@ -99,6 +80,8 @@
         $("#loginForm").submit();
 
     });
+
+
 
     /**
      * 判断字符串是否为空

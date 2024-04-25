@@ -1,40 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Yanz
-  Date: 2024/4/21
-  Time: 下午1:25
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>注册页面</title>
-    <style>
-        .head{
-            margin-top: 240px;
-        }
-        .right{
-            text-align: right;
-            width: 120px;
-        }
-        .center {
-            margin: auto;
-            width: 20%;
-        }
-        table{
-            width: 360px;
-        }
-        form{
-            width: 360px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="css/table.css">
 </head>
 <body>
-
-    <div class="head"></div>
-    <div class="center">
-            <form action="register" method="post">
+    <%@include file="head.jsp"%>
+        <div class="center">
+            <form action="register" method="post" id="registerForm">
                 <table>
                     <tr>
                         <td></td>
@@ -51,7 +24,6 @@
                         <td class="right"><label for="userPassword">密码：</label> </td>
                         <td><input type="password" name="userPassword" id="userPassword"> </td>
                         <td></td>
-
                     </tr>
                     <tr>
                         <td class="right"><label for="ConfirmPassword">确认密码：</label> </td>
@@ -92,7 +64,8 @@
                     </tr>
                 </table>
             </form>
-    </div>
+        </div>
+    <%@include file="footer.jsp"%>
 </body>
     <%--引入Jquery的js文件--%>
     <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
@@ -107,11 +80,15 @@
          *      如果密码为空，提示用户（span标签赋值），并且return
          *  5.如果都不为空，则手动提交表单
          */
-        $("#registerBtn").click(function () {
-            //获取用户姓名和密码的值
-            var userName = $("#userName").val();
-            var userPassword = $("#userPassword").val();
-            var ConfirmPassword = $("#ConfirmPassword").val();
+        $("#registerBtn").click(function(event) {
+                event.preventDefault(); // 阻止表单的默认提交行为
+
+                var userName = $("#userName").val();
+                var userPassword = $("#userPassword").val();
+                var ConfirmPassword = $("#ConfirmPassword").val();
+                var userEmail = $("#userEmail").val();
+                var userAddress = $("#userAddress").val();
+                var userPhone = $("#userPhone").val();
             //判断姓名是否为空
             if (isEmpty(userName)){
                 //如果姓名为空，提示用户（span标签赋值），并且return html()
@@ -130,11 +107,47 @@
                 $("#msg").html("两次输入的密码不相同！");
                 return;
             }
-
-
+            //判断邮箱是否符合要求
+            if (isEmpty(userEmail) ){
+                //如果邮箱为空，提示邮箱不能为空，并返回
+                $("#msg").html("邮箱不能为空！")
+                return;
+            } else {
+                // 创建一个邮箱正则表达式
+                var emailPattern = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+                // 使用正则表达式测试邮箱格式
+                if (!emailPattern.test(userEmail)) {
+                    // 如果邮箱格式不正确，提示邮箱格式错误，并返回
+                    $("#msg").html("邮箱格式错误！");
+                    return;
+                }
+            }
+            //判断是否输入地址
+            if (isEmpty(userAddress) ){
+                //如果地址为空，提示地址不能为空，返回
+                $("#msg").html("地址不能为空！")
+                return;
+            }
+            //判断手机号是否符合要求
+            if (isEmpty(userPhone) ){
+                //如果手机号是否为空，提示手机号不能为空，返回
+                $("#msg").html("手机号不能为空！")
+                return;
+            }
+            if (userPhone.length !== 11){
+                //如果手机号不足11位，提示不是正确的手机号，返回
+                $("#msg").html("手机号不合法！")
+                return;
+            }
             //如果都不为空，则手动提交表单
-            $("#loginForm").submit();
-
+            $("#registerForm").submit();
         });
+        function isEmpty(str){
+            if (str === null || str.trim() === "") {
+                return true;
+            }
+            return false;
+        }
+
     </script>
 </html>
