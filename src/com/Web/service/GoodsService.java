@@ -57,6 +57,50 @@ public class GoodsService {
         return messageModel;
     }
 
+//    public MessageModel addGoods(String goodsId, String goodsName,String category,String unitPrice,String stock,String factory,file image) {
+//        MessageModel messageModel = new MessageModel();
+//
+//        // 回显数据
+//        Goods g = new Goods();
+//        g.setGoodsId(goodsId);
+//        g.setGoodsName(goodsId);
+//        g.setCategory(goodsCategory);
+//        messageModel.setObject(g);
+//
+//        // 3. 调用DAO层方法检查物品是否存在
+//        SqlSession session = GetSqlSession.createSqlSession();
+//
+//        try {
+//            GoodsMapper goodsMapper = session.getMapper(GoodsMapper.class);
+//            List<Goods> existingGoods = goodsMapper.selectByGoodsId(goodsId);
+//
+//            if (existingGoods == null) {
+//                messageModel.setCode(0);
+//                messageModel.setMsg("不存在该物品！");
+//                return messageModel;
+//            }
+//            // 4. 如果一切正常，则将切换物品上架状态
+//            int rowsAffected = goodsMapper.addGoods(g);
+//            //提交事务
+//            if (rowsAffected > 0) {
+//                messageModel.setCode(1);
+//                messageModel.setMsg("添加成功！");
+//                session.commit();
+//            } else {
+//                messageModel.setCode(0);
+//                messageModel.setMsg("添加失败，请稍后重试！");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            messageModel.setCode(0);
+//            messageModel.setMsg("添加失败，发生异常：" + e.getMessage());
+//        } finally {
+//            session.close();
+//        }
+//        return messageModel;
+//    }
+
+
 
     /**
      * 切换物品上架状态

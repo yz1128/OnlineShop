@@ -27,5 +27,4 @@
         WHERE userName = #{userName};
     </update>
 
-<!-- insert id="query" -->
 </mapper>

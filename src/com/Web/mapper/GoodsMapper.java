@@ -8,5 +8,5 @@ public interface GoodsMapper {
     public List<Goods> queryByGoodsName(String goodsName);
     public List<Goods> selectByGoodsId(String goodsId);
     public int updateGoodsStateById(String goodsId,int goodsState);
-    public int insert(Goods goods);
+    public int addGoods(Goods goods);
 }

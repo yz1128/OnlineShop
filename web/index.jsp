@@ -39,6 +39,7 @@
     </button>
   </div>
   <!-- 商品展示 -->
+    <!-- TODO(Yanz,2024/4/26 下午11:52): 使用 JSTL 标签遍历商品列表 -->
   <div class="product-container">
     <div class="product">
       <img src="https://via.placeholder.com/200" alt="Product Image">

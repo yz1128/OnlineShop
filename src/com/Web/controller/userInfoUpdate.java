@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "userInfoUpdate", value = "/userInfoUpdate")
 public class userInfoUpdate extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
         User user = (User) session.getAttribute("user");
@@ -20,6 +20,5 @@ public class userInfoUpdate extends HttpServlet {
         }else {
             response.sendRedirect("userInfo.jsp");
         }
-
     }
 }

@@ -17,10 +17,9 @@
         UPDATE goods SET goodsState = #{newState} WHERE goodsId = #{goodsId}
     </update>
 
-    <insert id="insertGoods" parameterType="com.Web.entity.Goods">
-        INSERT INTO goods (goodsId, goodsName, category, unitPrice, stock, factory, image, addTime, goodsState)
-        VALUES (#{goodsId}, #{goodsName}, #{category}, #{unitPrice}, #{stock},#{factory}, #{image}, #{addTime}, #{goodsState})
+    <insert id="addGoods" parameterType="com.Web.entity.Goods">
+        INSERT INTO goods (goodsName, category, unitPrice, stock, factory, image, addTime, goodsState)
+        VALUES (#{goodsName}, #{category}, #{unitPrice}, #{stock},#{factory}, #{image}, #{addTime}, #{goodsState})
     </insert>
 
-<!-- insert id="query" -->
 </mapper>
