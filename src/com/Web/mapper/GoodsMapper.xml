@@ -4,7 +4,7 @@
 <mapper namespace="com.Web.mapper.GoodsMapper">
     <!-- id:对应Dao(mapper)层接口方法名 parameterType：指定输入类型 -->
     <!-- useGeneratedKeys="ture" 把新增加的主键赋值到自己定义的keyProperty(id)中 -->
-    <select id="selectByGoodsName" parameterType="String" resultType="com.Web.entity.Goods">
+    <select id="queryByGoodsName" parameterType="String" resultType="com.Web.entity.Goods">
         select * from goods where goodsName like CONCAT('%', #{goodsName}, '%')
     </select>
 

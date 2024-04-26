@@ -16,14 +16,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.jsp">首页</a>
+                    <a class="nav-link <%= request.getRequestURI().endsWith("index.jsp") ? "active" : "" %>" aria-current="page" href="index.jsp">首页</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">社区</a>
+                    <a class="nav-link <%= request.getRequestURI().endsWith("shequ.jsp") ? "active" : "" %>" href="#">社区</a>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle <%= request.getRequestURI().endsWith("123.jsp") ? "active" : "" %>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         分类
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -34,16 +34,16 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">关于我们</a>
+                    <a class="nav-link <%= request.getRequestURI().endsWith("about.jsp") ? "active" : "" %>" href="#">关于我们</a>
                 </li>
             </ul>
-            <form action="#" method="post" class="d-flex" style="margin-bottom: 0">
-                <input  class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form action="searchServlet" method="post" class="d-flex" style="margin-bottom: 0">
+                <input  class="form-control me-2" type="search" name="goodsName" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="userinfo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle <%=request.getRequestURI().endsWith("register.jsp") || request.getRequestURI().endsWith("userInfo.jsp") || request.getRequestURI().endsWith("login.jsp") ? "active" : "" %>" href="#" id="userinfo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         用户名
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="userinfo">
@@ -54,7 +54,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="car.jsp">购物车</a>
+                    <a class="nav-link <%= request.getRequestURI().endsWith("car.jsp") ? "active" : "" %>" href="car.jsp">购物车</a>
                 </li>
             </ul>
         </div>

@@ -47,7 +47,7 @@ public class registerServlet extends HttpServlet {
         MessageModel messageModel = userService.userRegister(userName,userPassword,ConfirmPassword,userEmail,userAddress,userPhone);
         //3.判断消息模型状态码
         if (messageModel.getCode() == 1) {//成功
-            //将消息模型中的用户信息设置到session作用域中，重定向跳转到index.jsp
+            //将消息模型中的用户信息设置到session作用域中，重定向跳转到login.jsp
             request.getSession().setAttribute("user", messageModel.getObject());
             response.sendRedirect("login.jsp");
         } else {//失败

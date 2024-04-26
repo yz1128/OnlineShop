@@ -23,5 +23,6 @@
     <!-- mappers映射器 -->
     <mappers>
         <mapper resource="com/Web/mapper/UserMapper.xml"/>
+        <mapper resource="com/Web/mapper/GoodsMapper.xml"/>
     </mappers>
 </configuration>

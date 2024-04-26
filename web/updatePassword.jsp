@@ -8,7 +8,7 @@
 <body>
 <%-- 检测用户是否登录，若已登录继续加载网页，未登录则转发到登录界面 --%>
 <%
-    if (session == null || session.getAttribute("user") == null) {
+    if (session.getAttribute("user") == null) {
         // 如果 session 不存在或者用户数据为空，则重定向到 login.jsp 页面
         response.sendRedirect("login.jsp");
     }
