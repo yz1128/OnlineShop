@@ -5,11 +5,19 @@
     <!-- id:对应Dao(mapper)层接口方法名 parameterType：指定输入类型 -->
     <!-- useGeneratedKeys="ture" 把新增加的主键赋值到自己定义的keyProperty(id)中 -->
     <select id="queryByGoodsName" parameterType="String" resultType="com.Web.entity.Goods">
-        select * from goods where goodsName like CONCAT('%', #{goodsName}, '%')
+        SELECT * FROM goods WHERE goodsName LIKE CONCAT('%', #{goodsName}, '%')
+    </select>
+
+    <select id="queryByCategory" parameterType="String" resultType="com.Web.entity.Goods">
+        select * from goods where category =#{goodsName}
     </select>
 
     <select id="selectByGoodsId" parameterType="String" resultType="com.Web.entity.Goods">
         select * from goods where goodsId = #{goodsName}
+    </select>
+
+    <select id="listGoods" parameterType="String" resultType="com.Web.entity.Goods">
+        SELECT * FROM goods WHERE goodsState != 1 ORDER BY viewCount DESC LIMIT 10;
     </select>
 
     <!-- 切换商品上架状态 -->

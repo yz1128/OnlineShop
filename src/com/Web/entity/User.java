@@ -11,8 +11,17 @@ public class User {
     private String userEmail;
     private String userAddress;
     private String userPhone;
+    private int power;
     private String newUserPassword1;
     private String newUserPassword2;
+
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
 
     public String getNewUserPassword1() {
         return newUserPassword1;

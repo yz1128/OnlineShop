@@ -5,6 +5,7 @@
     <title></title>
     <link href="css/bootstrap.min5.3.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -27,10 +28,10 @@
                         分类
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">电脑</a></li>
-                        <li><a class="dropdown-item" href="#">手机</a></li>
-                        <li><a class="dropdown-item" href="#">平板</a></li>
-                        <li><a class="dropdown-item" href="#">配件</a></li>
+                        <li><a class="dropdown-item" href="CategoryServlet?category=1">手机</a></li>
+                        <li><a class="dropdown-item" href="CategoryServlet?category=2">平板</a></li>
+                        <li><a class="dropdown-item" href="CategoryServlet?category=3">电脑</a></li>
+                        <li><a class="dropdown-item" href="CategoryServlet?category=4">配件</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -39,10 +40,11 @@
             </ul>
             <form action="searchServlet" method="post" class="d-flex" style="margin-bottom: 0">
                 <input  class="form-control me-2" type="search" name="goodsName" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
             </form>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
+
                     <a class="nav-link dropdown-toggle <%=request.getRequestURI().endsWith("register.jsp") || request.getRequestURI().endsWith("userInfo.jsp") || request.getRequestURI().endsWith("login.jsp") ? "active" : "" %>" href="#" id="userinfo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         用户名
                     </a>
@@ -54,7 +56,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <%= request.getRequestURI().endsWith("car.jsp") ? "active" : "" %>" href="car.jsp">购物车</a>
+                    <a class="nav-link <%= request.getRequestURI().endsWith("car.jsp") ? "active" : "" %>" href="car.jsp"><i class="bi bi-cart4">购物车</i></a>
                 </li>
             </ul>
         </div>

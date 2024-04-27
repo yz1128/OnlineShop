@@ -13,7 +13,6 @@ public class userInfoUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        PrintWriter out = response.getWriter();
         User user = (User) session.getAttribute("user");
         if (user == null) {
             response.sendRedirect("login.jsp");

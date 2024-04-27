@@ -11,8 +11,17 @@ package com.Web.entity.vo;
  */
 public class MessageModel {
     private Integer code = 1; //状态码 （1=成功，0=失败）
+    private Integer list = 1; //状态码 （1=成功，0=失败）
     private String msg = "成功！"; // 提示信息
     private Object object; // 回显对象 （基本数据类型、字符串类型、List、Map等）
+
+    public Integer getList() {
+        return list;
+    }
+
+    public void setList(Integer list) {
+        this.list = list;
+    }
 
     public Integer getCode() {
         return code;

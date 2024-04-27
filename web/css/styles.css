@@ -16,25 +16,29 @@
 }
 .product-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: wrap; /* 允许商品元素换行显示 */
+    justify-content: space-between; /* 水平方向均匀分布 */
 }
+
 .product {
-    width: 200px;
-    margin: 20px;
+    flex-basis: calc(20% - 40px); /* 每行显示五个商品，留出一定的间距 */
+    margin-bottom: 20px; /* 底部间距 */
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+
 .product img {
     width: 100%;
     border-radius: 5px;
 }
+
 .product h3 {
     margin-top: 10px;
     font-size: 18px;
     text-align: center;
 }
+
 
 
 /* 底部信息样式 */

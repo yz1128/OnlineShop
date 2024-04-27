@@ -13,36 +13,24 @@ import java.util.List;
  */
 public class GoodsService {
 
-    public MessageModel queryGoods(String goodsName) {
+    public MessageModel queryGoodsByName(String goodsName) {
         MessageModel messageModel = new MessageModel();
 
         //回显数据
         Goods g = new Goods();
         g.setGoodsName(goodsName);
         messageModel.setObject(g);
-        System.out.println(goodsName);
-        // 2.调用dao层的查询方法，通过用户名查询用户对象
+//        System.out.println(goodsName);
+//        2.调用dao层的查询方法，通过用户名查询用户对象
         SqlSession session = GetSqlSession.createSqlSession();
 
         try {
             GoodsMapper goodsMapper = session.getMapper(GoodsMapper.class);
             List<Goods> goodsList = goodsMapper.queryByGoodsName(goodsName);
-            System.out.println(goodsName + "goodsList容量" + goodsList.size());
-            for (Goods goods : goodsList) {
-                System.out.println("ID: " + goods.getGoodsId() + ", 名称: " + goods.getGoodsName());
-                // 这里可以输出更多商品的属性，例如价格、库存等
-
-            }
-
-            // 3.判断用户对象是否为空
-            if (goodsList == null) {
-                //将状态码、提示信息、回想数据设置到消息模型中，返回消息模型对象
-                messageModel.setCode(0);
-                messageModel.setMsg("商品不存在！");
-                //回显数据
-                return messageModel;
-            }
-
+//            for (Goods goods : goodsList) {
+//                System.out.println("ID: " + goods.getGoodsId() + ", 名称: " + goods.getGoodsName());
+//                // 这里可以输出更多商品的属性，例如价格、库存等
+//            }
             // 登录成功，将商品信息设置到消息模型中
             messageModel.setObject(goodsList);
             messageModel.setCode(1);
@@ -56,7 +44,70 @@ public class GoodsService {
         }
         return messageModel;
     }
+    public MessageModel queryGoodsByCategory(String category) {
+        MessageModel messageModel = new MessageModel();
 
+        //回显数据
+        Goods g = new Goods();
+        g.setCategory(category);
+        messageModel.setObject(g);
+        System.out.println(category);
+        // 2.调用dao层的查询方法，通过用户名查询用户对象
+        SqlSession session = GetSqlSession.createSqlSession();
+
+        try {
+            GoodsMapper goodsMapper = session.getMapper(GoodsMapper.class);
+            List<Goods> goodsList = goodsMapper.queryByCategory(category);
+            System.out.println(category + "goodsList容量" + goodsList.size());
+            for (Goods goods : goodsList) {
+                System.out.println("ID: " + goods.getGoodsId() + ", 名称: " + goods.getGoodsName());
+                // 这里可以输出更多商品的属性，例如价格、库存等
+
+            }
+            // 登录成功，将商品信息设置到消息模型中
+            messageModel.setObject(goodsList);
+            messageModel.setCode(1);
+            messageModel.setMsg("查询成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            messageModel.setCode(0);
+            messageModel.setMsg("搜索失败，发生异常：" + e.getMessage());
+        } finally {
+            session.close();
+        }
+        return messageModel;
+    }
+    public MessageModel listGoods() {
+        MessageModel messageModel = new MessageModel();
+
+        //回显数据
+        Goods g = new Goods();
+        messageModel.setObject(g);
+        // 2.调用dao层的查询方法，通过用户名查询用户对象
+        SqlSession session = GetSqlSession.createSqlSession();
+
+        try {
+            GoodsMapper goodsMapper = session.getMapper(GoodsMapper.class);
+            List<Goods> goodsList = goodsMapper.listGoods();
+
+            for (Goods goods : goodsList) {
+                System.out.println("ID: " + goods.getGoodsId() + ", 名称: " + goods.getGoodsName());
+                // 这里可以输出更多商品的属性，例如价格、库存等
+
+            }
+            // 登录成功，将商品信息设置到消息模型中
+            messageModel.setObject(goodsList);
+            messageModel.setCode(1);
+            messageModel.setMsg("查询成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            messageModel.setCode(0);
+            messageModel.setMsg("搜索失败，发生异常：" + e.getMessage());
+        } finally {
+            session.close();
+        }
+        return messageModel;
+    }
 //    public MessageModel addGoods(String goodsId, String goodsName,String category,String unitPrice,String stock,String factory,file image) {
 //        MessageModel messageModel = new MessageModel();
 //
