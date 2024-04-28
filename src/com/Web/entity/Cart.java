@@ -1,6 +1,6 @@
 package com.Web.entity;
 
-public class Car {
+public class Cart {
     private String carId;//购物车编号
     private int carNumb;
 

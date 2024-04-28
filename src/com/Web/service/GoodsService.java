@@ -80,7 +80,7 @@ public class GoodsService {
     public MessageModel listGoods() {
         MessageModel messageModel = new MessageModel();
 
-        //回显数据
+
         Goods g = new Goods();
         messageModel.setObject(g);
         // 2.调用dao层的查询方法，通过用户名查询用户对象
@@ -88,15 +88,14 @@ public class GoodsService {
 
         try {
             GoodsMapper goodsMapper = session.getMapper(GoodsMapper.class);
-            List<Goods> goodsList = goodsMapper.listGoods();
+            List<Goods> hotList = goodsMapper.listGoods();
 
-            for (Goods goods : goodsList) {
+            for (Goods goods : hotList) {
                 System.out.println("ID: " + goods.getGoodsId() + ", 名称: " + goods.getGoodsName());
                 // 这里可以输出更多商品的属性，例如价格、库存等
-
             }
             // 登录成功，将商品信息设置到消息模型中
-            messageModel.setObject(goodsList);
+            messageModel.setObject(hotList);
             messageModel.setCode(1);
             messageModel.setMsg("查询成功！");
         } catch (Exception e) {

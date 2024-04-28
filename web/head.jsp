@@ -56,7 +56,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <%= request.getRequestURI().endsWith("car.jsp") ? "active" : "" %>" href="car.jsp"><i class="bi bi-cart4">购物车</i></a>
+                    <a class="nav-link <%= request.getRequestURI().endsWith("cart.jsp") ? "active" : "" %>" href="cart.jsp"><i class="bi bi-cart4">购物车</i></a>
                 </li>
             </ul>
         </div>

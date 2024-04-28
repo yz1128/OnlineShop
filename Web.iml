@@ -25,5 +25,6 @@
     <orderEntry type="library" name="@popperjs/core" level="application" />
     <orderEntry type="library" name="jstl" level="project" />
     <orderEntry type="library" name="bootstrap-icons" level="application" />
+    <orderEntry type="library" name="gson-2.10.1" level="project" />
   </component>
 </module>
