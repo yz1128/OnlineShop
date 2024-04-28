@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 首先来解析 namespace：命名空间，此属性通常用来映射Dao(mapper)层接口 -->
+<mapper namespace="com.Web.mapper.CartMapper">
+    <!-- id:对应Dao(mapper)层接口方法名 parameterType：指定输入类型 -->
+    <!-- useGeneratedKeys="ture" 把新增加的主键赋值到自己定义的keyProperty(id)中 -->
+    <select id="queryByGoodsName" parameterType="String" resultType="com.Web.entity.Goods">
+        SELECT * FROM goods WHERE goodsName LIKE CONCAT('%', #{goodsName}, '%')
+    </select>
+
+    <insert id="insertCart" parameterType="com.Web.entity.Cart">
+        INSERT INTO cart (goodsName, unitPrice, image, userName, Numb)
+        SELECT
+            g.goodsName,
+            g.unitPrice,
+            g.image,
+            #{userName} AS userName,
+            1 AS Numb
+        FROM
+            goods g
+        WHERE
+            g.goodsName = #{goodsName}
+    </insert>
+
+
+</mapper>
