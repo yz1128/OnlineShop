@@ -9,18 +9,13 @@
     </select>
 
     <insert id="insertCart" parameterType="com.Web.entity.Cart">
-        INSERT INTO cart (goodsName, unitPrice, image, userName, Numb)
-        SELECT
-            g.goodsName,
-            g.unitPrice,
-            g.image,
-            #{userName} AS userName,
-            1 AS Numb
-        FROM
-            goods g
-        WHERE
-            g.goodsName = #{goodsName}
+        INSERT INTO cart (cartId, goodsName, unitPrice, image, userName, Numb )
+        VALUES (123,'133',12.1,'fas.jpg','admin',123)
     </insert>
+
+    <update id="updateNumbById" parameterType="com.Web.entity.Cart">
+        UPDATE goods SET goodsState = #{Numb} WHERE goodsId = #{userName}
+    </update>
 
 
 </mapper>

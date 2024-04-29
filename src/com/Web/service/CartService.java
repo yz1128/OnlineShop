@@ -16,10 +16,6 @@ public class CartService {
     public MessageModel insertCart(String userName, String goodsName) {
         MessageModel messageModel = new MessageModel();
 
-        // 回显数据
-        Cart c = new Cart();
-        c.setUserName(userName);
-        c.setGoodsName(goodsName);
 
         // 1. 参数的非空判断
         if (StringUtil.isEmpty(userName) || StringUtil.isEmpty(goodsName)) {
@@ -31,11 +27,12 @@ public class CartService {
         // 2.调用dao层的查询方法，通过用户名查询用户对象
         try {
             CartMapper cartMapper = session.getMapper(CartMapper.class);
-            int rowsAffected = cartMapper.insertCart(c);
+            int rowsAffected = cartMapper.insertCart();
             System.out.println(rowsAffected);
-            // 3.判断用户对象是否为空
+            session.commit();
+            // 判断是否插入成功
             if (rowsAffected > 0) {
-                session.commit();
+
                 messageModel.setCode(1);
                 messageModel.setMsg("修改成功！");
             } else {

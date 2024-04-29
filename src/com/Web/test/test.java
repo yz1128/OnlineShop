@@ -1,18 +1,20 @@
 package com.Web.test;
 
-import com.Web.entity.User;
-import com.Web.mapper.UserMapper;
+import com.Web.entity.Cart;
+import com.Web.mapper.CartMapper;
 import com.Web.util.GetSqlSession;
 import org.apache.ibatis.session.SqlSession;
 
 public class test {
     public static void main(String[] args) {
         // 获取sqlSession对象
-        SqlSession Session = GetSqlSession.createSqlSession();
+        SqlSession session = GetSqlSession.createSqlSession();
         // 得到对应Mapper
-        UserMapper userMapper = Session.getMapper(UserMapper.class);
-        // 调用方法，返回用户对象
-        User user = userMapper.queryUserByName("admin");
-        System.out.println(user);
+        Cart cart =new Cart();
+        cart.setUserName("1");
+        cart.setNumb(3);
+        CartMapper cartMapper = session.getMapper(CartMapper.class);
+        int rowsAffected = cartMapper.updateNumbById(cart);
+        System.out.println(rowsAffected);
     }
 }

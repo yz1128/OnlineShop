@@ -1,27 +1,19 @@
 package com.Web.entity;
 
 public class Cart {
-    private String carId;//购物车编号
+    private int cartId;//购物车编号
     private String goodsName;
     private double unitPrice;
     private String image;
     private String userName;
     private int Numb;
 
-    public String getUserName() {
-        return userName;
+    public int getCartId() {
+        return cartId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getCarId() {
-        return carId;
-    }
-
-    public void setCarId(String carId) {
-        this.carId = carId;
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 
     public String getGoodsName() {
@@ -46,6 +38,14 @@ public class Cart {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public int getNumb() {

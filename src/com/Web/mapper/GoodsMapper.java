@@ -1,14 +1,15 @@
 package com.Web.mapper;
 
+import com.Web.entity.Cart;
 import com.Web.entity.Goods;
 
 import java.util.List;
 
 public interface GoodsMapper {
-    public List<Goods> queryByGoodsName(String goodsName);
-    public List<Goods> queryByCategory(String category);
-    public List<Goods> selectByGoodsId(String goodsId);
-    public List<Goods> listGoods();
-    public int updateGoodsStateById(String goodsId,int goodsState);
-    public int addGoods(Goods goods);
+     List<Goods> queryByGoodsName(String goodsName);
+     List<Goods> queryByCategory(String category);
+     List<Goods> selectByGoodsId(int goodsId);
+     List<Goods> listGoods();
+     int updateGoodsStateById(Cart cart);
+     int addGoods(Goods goods);
 }

@@ -18,7 +18,8 @@ public class insertCartServlet extends HttpServlet {
         String goodsName = request.getParameter("goodsName");
         String userName = request.getParameter("userName");
         // Creating a message model object
-        MessageModel messageModel = cartService.queryGoodsByName(goodsName);
+        System.out.println(userName + goodsName);
+        MessageModel messageModel = cartService.insertCart(userName,goodsName);
         // Validating parameters
         if (goodsName == null || goodsName.isEmpty()) {
             messageModel.setCode(0); // Setting status code to failure

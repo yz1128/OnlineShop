@@ -24,5 +24,6 @@
     <mappers>
         <mapper resource="com/Web/mapper/UserMapper.xml"/>
         <mapper resource="com/Web/mapper/GoodsMapper.xml"/>
+        <mapper resource="com/Web/mapper/CartMapper.xml"/>
     </mappers>
 </configuration>

@@ -21,9 +21,7 @@
     </select>
 
     <!-- 切换商品上架状态 -->
-    <update id="updateGoodsStateById" parameterType="com.Web.entity.Goods">
-        UPDATE goods SET goodsState = #{newState} WHERE goodsId = #{goodsId}
-    </update>
+
 
     <insert id="addGoods" parameterType="com.Web.entity.Goods">
         INSERT INTO goods (goodsName, category, unitPrice, stock, factory, image, addTime, goodsState)

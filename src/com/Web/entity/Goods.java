@@ -3,7 +3,7 @@ package com.Web.entity;
 import java.util.Date;
 
 public class Goods {
-    private String goodsId;     //商品编号
+    private int goodsId;     //商品编号
     private String goodsName;   //商品名称
     private String category;    //商品分类
     private double unitPrice;   //商品单价
@@ -15,11 +15,11 @@ public class Goods {
     private Date updateTime;    //更新时间
     private int goodsState;
 
-    public String getGoodsId() {
+    public int getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(String goodsId) {
+    public void setGoodsId(int goodsId) {
         this.goodsId = goodsId;
     }
 

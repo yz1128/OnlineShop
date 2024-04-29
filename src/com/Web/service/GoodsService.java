@@ -157,7 +157,7 @@ public class GoodsService {
      * @param goodsId
      * @return
      */
-    public MessageModel shiftGoodsState(String goodsId) {
+    public MessageModel shiftGoodsState(int goodsId) {
         MessageModel messageModel = new MessageModel();
 
         // 回显数据
@@ -185,7 +185,8 @@ public class GoodsService {
                 g.setGoodsState(1);
             }
             // 4. 如果一切正常，则将切换物品上架状态
-            int rowsAffected = goodsMapper.updateGoodsStateById(g.getGoodsId(),g.getGoodsState());
+            int rowsAffected = 0;
+//                    goodsMapper.updateGoodsStateById(g);
             //提交事务
             if (rowsAffected > 0) {
                 messageModel.setCode(1);
