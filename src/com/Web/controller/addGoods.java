@@ -12,7 +12,7 @@ public class addGoods extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-
+        //TODO(Yanz,2024/4/29 下午11:59):控制台添加物品
 
 
     }

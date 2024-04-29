@@ -29,6 +29,12 @@
         select * from cart where goodsName =#{goodsName} AND userName = #{userName}
     </select>
 
+    <update id="deleteByName" parameterType="map">
+        UPDATE cart
+        SET Numb = Numb - 1
+        WHERE userName = #{userName} AND goodsName = #{goodsName}
+    </update>
+
 
 
     <!--    <update id="updateNumbById" parameterType="com.Web.entity.Cart">-->

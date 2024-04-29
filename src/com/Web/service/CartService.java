@@ -69,6 +69,41 @@ public class CartService {
     }
     public MessageModel queryByName(String userName, String goodsName) {
         MessageModel messageModel = new MessageModel();
+
+        //回显数据
+
+
+        Cart c = new Cart();
+        c.setUserName(userName);
+        c.setGoodsName(goodsName);
+        messageModel.setObject(c);
+
+        SqlSession session = GetSqlSession.createSqlSession();
+        try {
+            CartMapper cartMapper = session.getMapper(CartMapper.class);
+            List<Cart> cartList = cartMapper.queryByName(c);
+
+            if (cartList != null && !cartList.isEmpty()) {
+                // Successfully retrieved carts
+                messageModel.setObject(cartList);
+                messageModel.setCode(1);
+                messageModel.setMsg("查询成功！");
+            } else {
+                // No carts found for the given name
+                messageModel.setCode(2);
+                messageModel.setMsg("没有找到相关商品！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            messageModel.setCode(0);
+            messageModel.setMsg("搜索失败，发生异常：" + e.getMessage());
+        } finally {
+            session.close();
+        }
+        return messageModel;
+    }
+    public MessageModel deleteByName(String userName, String goodsName) {
+        MessageModel messageModel = new MessageModel();
         SqlSession session = GetSqlSession.createSqlSession();
         //回显数据
         CartMapper cartMapper = session.getMapper(CartMapper.class);
@@ -80,14 +115,13 @@ public class CartService {
         messageModel.setObject(c);
 
         try {
-            List<Cart> cartList = cartMapper.queryByName(c);
-            if (cartList != null && cartList.size() > 0) {
+            int rowsAffected = cartMapper.deleteByName(c);
+            if (rowsAffected > 0) {
                 messageModel.setCode(1);
             }else {
                 messageModel.setCode(0);
+                messageModel.setMsg("搜索失败，发生异常!");
             }
-            messageModel.setObject(cartList);
-            messageModel.setMsg("查询成功！");
         } catch (Exception e) {
             e.printStackTrace();
             messageModel.setCode(0);

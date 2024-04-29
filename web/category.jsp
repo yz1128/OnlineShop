@@ -13,14 +13,10 @@
 <body>
 <%@include file="head.jsp"%>
 
-<%-- 检查是否有商品列表 --%>
 <div class="shop">
-    <!-- 商品列表 -->
-    <!-- 商品列表 -->
     <div id="product-container" class="product-container" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
         <!-- 商品列表 -->
     </div>
-
 </div>
 
 <%@include file="footer.jsp"%>
@@ -69,11 +65,12 @@
                     var userName = '<%= userName %>';
                     if (isEmpty(userName)) {
                         window.location.href = "login.jsp"; // 重定向到登录页面
+                        return;
                     }
                     // 发起 AJAX 请求将商品添加到购物车
                     $.ajax({
                         type: "POST",
-                        url: "insertCart", // 假设存在一个用于处理添加到购物车请求的 Servlet
+                        url: "insertCartServlet", // 假设存在一个用于处理添加到购物车请求的 Servlet
                         data: { goodsName,userName: goodsName,userName }, // 将商品名称作为请求参数发送到服务器
                         success: function(response) {
                             // 处理添加到购物车成功的情况（如果需要）

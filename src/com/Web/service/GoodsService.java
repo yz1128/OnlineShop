@@ -94,7 +94,7 @@ public class GoodsService {
                 System.out.println("ID: " + goods.getGoodsId() + ", 名称: " + goods.getGoodsName());
                 // 这里可以输出更多商品的属性，例如价格、库存等
             }
-            // 登录成功，将商品信息设置到消息模型中
+            // 将商品信息设置到消息模型中
             messageModel.setObject(hotList);
             messageModel.setCode(1);
             messageModel.setMsg("查询成功！");

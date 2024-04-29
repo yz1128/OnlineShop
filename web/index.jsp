@@ -46,6 +46,9 @@
     </div>
 </div>
 
+<!-- 底部信息 -->
+<%@include file="footer.jsp" %>
+
 <!-- 在页面底部固定位置创建一个容器用于显示 Toast 通知 -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
   <!-- 这里将放置 Toast 通知 -->
@@ -88,6 +91,7 @@
           var userName = '<%= userName %>';
           if (isEmpty(userName)) {
             window.location.href = "login.jsp"; // 重定向到登录页面
+            return;
           }
           // 发起 AJAX 请求将商品添加到购物车
           $.ajax({
@@ -146,7 +150,7 @@
 
 
 
-<%@include file="footer.jsp" %>
+
 
 </body>
 </html>
