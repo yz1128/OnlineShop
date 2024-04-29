@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface GoodsMapper {
      List<Goods> queryByGoodsName(String goodsName);
+     Goods searchByGoodsName(String goodsName);
      List<Goods> queryByCategory(String category);
      List<Goods> selectByGoodsId(int goodsId);
      List<Goods> listGoods();

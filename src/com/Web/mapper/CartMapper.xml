@@ -4,18 +4,36 @@
 <mapper namespace="com.Web.mapper.CartMapper">
     <!-- id:对应Dao(mapper)层接口方法名 parameterType：指定输入类型 -->
     <!-- useGeneratedKeys="ture" 把新增加的主键赋值到自己定义的keyProperty(id)中 -->
-    <select id="queryByGoodsName" parameterType="String" resultType="com.Web.entity.Goods">
-        SELECT * FROM goods WHERE goodsName LIKE CONCAT('%', #{goodsName}, '%')
-    </select>
 
     <insert id="insertCart" parameterType="com.Web.entity.Cart">
-        INSERT INTO cart (cartId, goodsName, unitPrice, image, userName, Numb )
-        VALUES (123,'133',12.1,'fas.jpg','admin',123)
+        INSERT INTO cart (goodsName,userName,image,unitPrice,Numb)
+        SELECT #{goodsName},#{userName},image,unitPrice,1
+        FROM goods
+        WHERE goodsName = #{goodsName}
     </insert>
 
-    <update id="updateNumbById" parameterType="com.Web.entity.Cart">
-        UPDATE goods SET goodsState = #{Numb} WHERE goodsId = #{userName}
+    <update id="updateCart" parameterType="com.Web.entity.Cart">
+        UPDATE cart
+        SET Numb = Numb + 1
+        WHERE userName = #{userName} AND goodsName = #{goodsName}
     </update>
+
+    <!-- CartMapper.xml -->
+    <update id="updateNumbByName" parameterType="com.Web.entity.Cart">
+        UPDATE cart
+        SET Numb = Numb + 1
+        WHERE cartId = #{cartId} AND userName = #{userName} AND goodsName = #{goodsName}
+    </update>
+
+    <select id="queryByName" parameterType="String" resultType="com.Web.entity.Cart">
+        select * from cart where goodsName =#{goodsName} AND userName = #{userName}
+    </select>
+
+
+
+    <!--    <update id="updateNumbById" parameterType="com.Web.entity.Cart">-->
+<!--        UPDATE goods SET goodsState = #{Numb} WHERE goodsId = #{userName}-->
+<!--    </update>-->
 
 
 </mapper>

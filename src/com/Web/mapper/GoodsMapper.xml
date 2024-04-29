@@ -8,6 +8,10 @@
         SELECT * FROM goods WHERE goodsName LIKE CONCAT('%', #{goodsName}, '%')
     </select>
 
+    <select id="searchByGoodsName" parameterType="String" resultType="com.Web.entity.Goods">
+        SELECT * FROM goods WHERE goodsName =#{goodsName}
+    </select>
+
     <select id="queryByCategory" parameterType="String" resultType="com.Web.entity.Goods">
         select * from goods where category =#{goodsName}
     </select>

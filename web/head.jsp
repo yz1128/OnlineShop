@@ -28,10 +28,10 @@
                         分类
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="CategoryServlet?category=1">手机</a></li>
-                        <li><a class="dropdown-item" href="CategoryServlet?category=2">平板</a></li>
-                        <li><a class="dropdown-item" href="CategoryServlet?category=3">电脑</a></li>
-                        <li><a class="dropdown-item" href="CategoryServlet?category=4">配件</a></li>
+                        <li><a class="dropdown-item" href="category.jsp?category=1">手机</a></li>
+                        <li><a class="dropdown-item" href="category.jsp?category=2">平板</a></li>
+                        <li><a class="dropdown-item" href="category.jsp?category=3">电脑</a></li>
+                        <li><a class="dropdown-item" href="category.jsp?category=4">配件</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -73,7 +73,7 @@
 %>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var userName = '<%= userName %>'; // 将用户名传递给 JavaScript 变量
         if (userName) {
             $("#userinfo").text(userName); // 更新导航栏中的用户名
@@ -85,6 +85,7 @@
             $(".dropdown-menu .dropdown-item:contains('登录')").show(); // 显示登录按钮
         }
     });
+
 </script>
 </body>
 </html>

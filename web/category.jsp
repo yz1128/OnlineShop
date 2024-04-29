@@ -1,8 +1,14 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Yanz
+  Date: 2024/4/29
+  Time: 下午3:57
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>搜索结果</title>
+    <title>分类</title>
 </head>
 <body>
 <%@include file="head.jsp"%>
@@ -23,6 +29,9 @@
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <!-- 这里将放置 Toast 通知 -->
 </div>
+<%
+    String category = (String) request.getParameter("category");
+%>
 
 <%-- 异步加载商品数据 --%>
 <script>
@@ -30,7 +39,7 @@
         // 发起 AJAX 请求获取商品数据
         $.ajax({
             type: "POST",
-            url: "listServlet",
+            url: "categoryServlet?category=<%= category %>",
             dataType: "json",
             success: function(data) {
                 // 成功获取数据后，更新页面内容

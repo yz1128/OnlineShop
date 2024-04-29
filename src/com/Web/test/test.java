@@ -14,7 +14,7 @@ public class test {
         cart.setUserName("1");
         cart.setNumb(3);
         CartMapper cartMapper = session.getMapper(CartMapper.class);
-        int rowsAffected = cartMapper.updateNumbById(cart);
-        System.out.println(rowsAffected);
+//        int rowsAffected = cartMapper.updateNumbById(cart);
+//        System.out.println(rowsAffected);
     }
 }
