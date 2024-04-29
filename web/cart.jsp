@@ -17,7 +17,6 @@
     }
 %>
 
-<!-- TODO(Yanz,2024/4/26 下午11:36): 购物车功能 -->
 <div class="shop">
     <div id="product-container" class="product-container" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
         <!-- 商品列表 -->
