@@ -90,10 +90,10 @@ public class GoodsService {
             GoodsMapper goodsMapper = session.getMapper(GoodsMapper.class);
             List<Goods> hotList = goodsMapper.listGoods();
 
-            for (Goods goods : hotList) {
-                System.out.println("ID: " + goods.getGoodsId() + ", 名称: " + goods.getGoodsName());
-                // 这里可以输出更多商品的属性，例如价格、库存等
-            }
+//            for (Goods goods : hotList) {
+//                System.out.println("ID: " + goods.getGoodsId() + ", 名称: " + goods.getGoodsName());
+//                // 这里可以输出更多商品的属性，例如价格、库存等
+//            }
             // 将商品信息设置到消息模型中
             messageModel.setObject(hotList);
             messageModel.setCode(1);

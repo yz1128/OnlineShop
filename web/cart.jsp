@@ -33,10 +33,12 @@
 <%-- 异步加载商品数据 --%>
 <script>
     $(document).ready(function() {
+        var userName = '<%= userName %>';
         // 发起 AJAX 请求获取商品数据
         $.ajax({
             type: "POST",
             url: "showCartServlet",
+            data: {userName: userName},
             dataType: "json",
             success: function(data) {
                 // 成功获取数据后，更新页面内容
@@ -47,20 +49,22 @@
                 // 遍历商品数据，生成 HTML 内容并添加到容器中
                 for (var i = 0; i < products.length; i++) {
                     var product = products[i];
-                    var html = "<div class='product' style='flex: 0 0 20%; max-width: 20%; margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 5px;'>" +
-                        "<img src='image/" + product.image + "' alt='Product Image' style='width: 180px; height: 180px; display: block; margin: 0 auto;'> " +
+                    var html = "<div class='product' style='display: flex; margin-bottom: 20px;'>" +
+                        "<div class='product-image' style='flex: 0 0 180px; margin-right: 20px;'>" +
+                        "<img src='image/" + product.image + "' alt='Product Image' style='width: 180px; height: 180px;'>" +
+                        "</div>" +
+                        "<div class='product-details' style='flex: 1;'>" +
                         "<h3>" + product.goodsName + "</h3>" +
-                        "<p>" + product.details + "</p>" +
-                        "<p>" + product.unitPrice + "￥</p>" +
-                        "<p>" + (product.stock > 100 ? "有货" : product.stock) + "</p>" +
-                        "<button class=Delete-btn' data-product-name='" + product.goodsName + "'>Add to Cart</button>" + // 将商品名称作为按钮的自定义属性
+                        "</div>" +
                         "</div>";
 
                     // 添加到容器
                     container.append(html);
                 }
 
-                // 为每个 "Add to Cart" 按钮添加点击事件处理程序
+
+
+                // 为每个 "Delete-btn" 按钮添加点击事件处理程序
                 $(".Delete-btn").click(function() {
                     var goodsName = $(this).data("product-name"); // 获取商品名称
                     var userName = '<%= userName %>';

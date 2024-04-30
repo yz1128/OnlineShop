@@ -29,6 +29,10 @@
         select * from cart where goodsName =#{goodsName} AND userName = #{userName}
     </select>
 
+    <select id="queryByUserName" parameterType="String" resultType="com.Web.entity.Cart">
+        select * from cart where userName = #{userName}
+    </select>
+
     <update id="deleteByName" parameterType="map">
         UPDATE cart
         SET Numb = Numb - 1

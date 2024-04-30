@@ -9,5 +9,6 @@ public interface CartMapper {
      int updateCart(Cart cart);
      int deleteByName(Cart cart);
      List<Cart> queryByName(Cart cart);
+     List<Cart> queryByUserName(String userName);
 //     int updateNumbById(Cart cart);
 }
