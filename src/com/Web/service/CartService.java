@@ -139,16 +139,17 @@ public class CartService {
         Cart c = new Cart();
         c.setUserName(userName);
         c.setGoodsName(goodsName);
-
         messageModel.setObject(c);
 
         try {
             int rowsAffected = cartMapper.deleteByName(c);
             if (rowsAffected > 0) {
                 messageModel.setCode(1);
+                System.out.println("删除成功！");
             }else {
                 messageModel.setCode(0);
                 messageModel.setMsg("搜索失败，发生异常!");
+                System.out.println("删除失败！");
             }
         } catch (Exception e) {
             e.printStackTrace();

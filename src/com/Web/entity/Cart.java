@@ -6,7 +6,25 @@ public class Cart {
     private double unitPrice;
     private String image;
     private String userName;
+    public String factory;
     private int Numb;
+    private String details;
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public String getFactory() {
+        return factory;
+    }
+
+    public void setFactory(String factory) {
+        this.factory = factory;
+    }
 
     public int getCartId() {
         return cartId;

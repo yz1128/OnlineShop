@@ -6,8 +6,8 @@
     <!-- useGeneratedKeys="ture" 把新增加的主键赋值到自己定义的keyProperty(id)中 -->
 
     <insert id="insertCart" parameterType="com.Web.entity.Cart">
-        INSERT INTO cart (goodsName,userName,image,unitPrice,Numb)
-        SELECT #{goodsName},#{userName},image,unitPrice,1
+        INSERT INTO cart (goodsName,userName,factory,image,unitPrice,Numb)
+        SELECT #{goodsName},#{userName},factory,image,unitPrice,1
         FROM goods
         WHERE goodsName = #{goodsName}
     </insert>
