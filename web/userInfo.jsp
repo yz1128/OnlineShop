@@ -6,7 +6,7 @@
     <link href="css/bootstrap.min5.3.css" rel="stylesheet">
     <link rel="stylesheet" href="css/table.css">
 </head>
-<body>
+<body style="background-color: #E8E1DF;">
 <%-- 检测用户是否登录，若已登录继续加载网页，未登录则转发到登录界面 --%>
 <%
     if (session.getAttribute("user") == null) {

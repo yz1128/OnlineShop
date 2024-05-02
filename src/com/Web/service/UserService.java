@@ -1,5 +1,6 @@
 package com.Web.service;
 
+import com.Web.entity.Goods;
 import com.Web.entity.User;
 import com.Web.entity.vo.MessageModel;
 import com.Web.mapper.UserMapper;
@@ -48,7 +49,7 @@ public class UserService {
                 messageModel.setMsg("用户密码不正确！");
                 return messageModel;
             }
-
+            System.out.println(user.getBalance());
             // 登录成功，将用户信息设置到消息模型中
             messageModel.setObject(user);
             messageModel.setCode(1);
@@ -79,7 +80,6 @@ public class UserService {
         u.setUserAddress(userAddress);
         u.setUserPhone(userPhone);
         messageModel.setObject(u);
-        System.out.println("ConfirmPassword："+u.getConfirmPassword());
         // 1. 参数的非空判断
         if (StringUtil.isEmpty(userName) || StringUtil.isEmpty(userPassword) || StringUtil.isEmpty(ConfirmPassword) || StringUtil.isEmpty(userEmail) || StringUtil.isEmpty(userAddress) || StringUtil.isEmpty(userPhone)) {
             messageModel.setCode(0);
@@ -134,7 +134,6 @@ public class UserService {
         u.setUserAddress(userAddress);
         u.setUserPhone(userPhone);
         messageModel.setObject(u);
-        System.out.println("ConfirmPassword："+u.getConfirmPassword());
         // 1. 参数的非空判断
         if (StringUtil.isEmpty(userEmail) || StringUtil.isEmpty(userAddress) || StringUtil.isEmpty(userPhone)) {
             messageModel.setCode(0);
@@ -215,6 +214,59 @@ public class UserService {
             e.printStackTrace();
             messageModel.setCode(0);
             messageModel.setMsg("修改失败，发生异常：" + e.getMessage());
+        } finally {
+            session.close();
+        }
+        return messageModel;
+    }
+
+    public MessageModel updateBalance(String userName,double balance) {
+        MessageModel messageModel = new MessageModel();
+        SqlSession session = GetSqlSession.createSqlSession();
+        User u = new User();
+        u.setUserName(userName);
+        u.setBalance(balance);
+        try {
+            UserMapper userMapper = session.getMapper(UserMapper.class);
+            int rowsAffected = userMapper.updateBalance(u);
+            if (rowsAffected > 0) {
+                session.commit();
+                messageModel.setCode(1);
+                messageModel.setMsg("修改成功！");
+            } else {
+                messageModel.setCode(0);
+                messageModel.setMsg("修改失败，请稍后重试！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            messageModel.setCode(0);
+            messageModel.setMsg("搜索失败，发生异常：" + e.getMessage());
+        } finally {
+            session.close();
+        }
+        return messageModel;
+    }
+
+    public MessageModel queryUserByName(String userName) {
+        MessageModel messageModel = new MessageModel();
+
+        //回显数据
+        User u = new User();
+        u.setUserName(userName);
+        messageModel.setObject(u);
+        SqlSession session = GetSqlSession.createSqlSession();
+
+        try {
+            UserMapper userMapper = session.getMapper(UserMapper.class);
+            User user = userMapper.queryUserByName(userName);
+
+            messageModel.setObject(user);
+            messageModel.setCode(1);
+            messageModel.setMsg("查询成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            messageModel.setCode(0);
+            messageModel.setMsg("搜索失败，发生异常：" + e.getMessage());
         } finally {
             session.close();
         }

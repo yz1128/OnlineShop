@@ -18,12 +18,12 @@ public class insertCartServlet extends HttpServlet {
         response.setContentType("application/json");
         String goodsName = request.getParameter("goodsName");
         String userName = request.getParameter("userName");
-        System.out.println(userName + goodsName);
+        int userId = Integer.parseInt(request.getParameter("userId"));
         MessageModel messageModel = cartService.queryByName(userName, goodsName);
         //先查是否有此userName和goodsName的cartId
         if (messageModel.getCode() != 1) {
             //没有就创建insertCart插入一个
-            cartService.insertCart(userName,goodsName);
+            cartService.insertCart(userName,goodsName,userId);
         }else {
             // 如果有就updateNumbByName
             cartService.updateCart(userName,goodsName);

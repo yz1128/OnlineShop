@@ -7,7 +7,7 @@
   <link href="css/bootstrap.min5.3.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body style="background-color: #E8E1DF;">
 <!-- 导航栏 -->
 <%@include file="head.jsp" %>
 
@@ -48,15 +48,15 @@
 
 <!-- 底部信息 -->
 <%@include file="footer.jsp" %>
-
-<!-- 在页面底部固定位置创建一个容器用于显示 Toast 通知 -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
   <!-- 这里将放置 Toast 通知 -->
 </div>
-
-
-<%-- 异步加载商品数据 --%>
 <script>
+  <!-- 在页面底部固定位置创建一个容器用于显示 Toast 通知 -->
+
+
+
+
   $(document).ready(function() {
     // 发起 AJAX 请求获取商品数据
     $.ajax({
@@ -89,6 +89,7 @@
         $(".add-to-cart-btn").click(function() {
           var goodsName = $(this).data("product-name"); // 获取商品名称
           var userName = '<%= userName %>';
+          var userId = '<%= userId %>'
           if (isEmpty(userName)) {
             window.location.href = "login.jsp"; // 重定向到登录页面
             return;
@@ -97,7 +98,7 @@
           $.ajax({
             type: "POST",
             url: "insertCartServlet", // 假设存在一个用于处理添加到购物车请求的 Servlet
-            data: { goodsName,userName: goodsName,userName }, // 将商品名称作为请求参数发送到服务器
+            data: { goodsName,userName,userId: goodsName,userName,userId }, // 将商品名称作为请求参数发送到服务器
             success: function(response) {
               // 处理添加到购物车成功的情况（如果需要）
               showToast(goodsName); // 显示 Toast 通知
@@ -145,6 +146,7 @@
       toast.remove();
     });
   }
+
 </script>
 
 

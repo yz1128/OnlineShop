@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import java.util.List;
 
 public class CartService {
-    public MessageModel insertCart(String userName, String goodsName) {
+    public MessageModel insertCart(String userName, String goodsName,int userId) {
         MessageModel messageModel = new MessageModel();
         SqlSession session = GetSqlSession.createSqlSession();
 
@@ -18,7 +18,7 @@ public class CartService {
             Cart cart = new Cart();
             cart.setUserName(userName);
             cart.setGoodsName(goodsName);
-
+            cart.setUserId(userId);
             // 尝试插入购物车
             int rowsAffected = cartMapper.insertCart(cart);
             if (rowsAffected > 0) {
@@ -144,6 +144,37 @@ public class CartService {
         try {
             int rowsAffected = cartMapper.deleteByName(c);
             if (rowsAffected > 0) {
+                session.commit();
+                messageModel.setCode(1);
+                System.out.println("删除成功！");
+            }else {
+                messageModel.setCode(0);
+                messageModel.setMsg("搜索失败，发生异常!");
+                System.out.println("删除失败！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            messageModel.setCode(0);
+            messageModel.setMsg("搜索失败，发生异常：" + e.getMessage());
+        } finally {
+            session.close();
+        }
+        return messageModel;
+    }
+    public MessageModel deleteAllByName(String userName) {
+        MessageModel messageModel = new MessageModel();
+        SqlSession session = GetSqlSession.createSqlSession();
+        //回显数据
+        CartMapper cartMapper = session.getMapper(CartMapper.class);
+
+        Cart c = new Cart();
+        c.setUserName(userName);
+        messageModel.setObject(c);
+
+        try {
+            int rowsAffected = cartMapper.deleteByName(c);
+            if (rowsAffected > 0) {
+                session.commit();
                 messageModel.setCode(1);
                 System.out.println("删除成功！");
             }else {

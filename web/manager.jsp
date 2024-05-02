@@ -11,7 +11,7 @@
     <title>后台管理</title>
     <link rel="stylesheet" href="css/table.css">
 </head>
-<body>
+<body style="background-color: #E8E1DF;">
 <%
     if ( session.getAttribute("user") == null || ((User) session.getAttribute("user")).getPower() == 0 ) {
         // 如果 session 不存在或者用户权限为0，则重定向到 login.jsp 页面

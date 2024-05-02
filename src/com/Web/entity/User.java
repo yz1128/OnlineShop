@@ -14,6 +14,15 @@ public class User {
     private int power;
     private String newUserPassword1;
     private String newUserPassword2;
+    private double balance;
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 
     public int getPower() {
         return power;

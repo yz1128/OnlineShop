@@ -4,7 +4,7 @@
 <head>
     <title>搜索结果</title>
 </head>
-<body>
+<body style="background-color: #E8E1DF;">
 <%@include file="head.jsp"%>
 
 <%-- 检查是否有商品列表 --%>

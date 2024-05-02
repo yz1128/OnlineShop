@@ -9,6 +9,15 @@ public class Cart {
     public String factory;
     private int Numb;
     private String details;
+    public int userId;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getDetails() {
         return details;

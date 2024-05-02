@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 首先来解析 namespace：命名空间，此属性通常用来映射Dao(mapper)层接口 -->
+<mapper namespace="com.Web.mapper.OrderMapper">
+    <!-- id:对应Dao(mapper)层接口方法名 parameterType：指定输入类型 -->
+    <!-- useGeneratedKeys="ture" 把新增加的主键赋值到自己定义的keyProperty(id)中 -->
+
+    <!-- TODO(Yanz,2024/5/2 下午1:34): 添加OrderMapper -->
+    <insert id="insertOrder" parameterType="com.Web.entity.Order">
+        INSERT INTO `order` (orderId, userId, totalPrice, userAddress, receiptName)
+        VALUES (#{orderId}, #{userId}, #{totalPrice}, #{userAddress}, #{receiptName})
+    </insert>
+
+</mapper>

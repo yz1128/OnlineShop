@@ -7,14 +7,13 @@
     color: rgba(255, 255, 255, 0.55);
 }
 
-.body{
-    background-color: #E8E1DF;;
-}
+
 /* 商品展示样式 */
 .shop{
     display: block;
     margin: 10px auto ;
     width: 1200px;
+    background-color: white
 }
 
 .product-container {

@@ -10,6 +10,7 @@
 <head>
     <title>添加商品</title>
     <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 

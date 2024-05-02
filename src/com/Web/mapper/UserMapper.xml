@@ -27,4 +27,10 @@
         WHERE userName = #{userName};
     </update>
 
+    <update id="updateBalance" parameterType="com.Web.entity.User">
+        UPDATE user
+        SET balance = #{balance}
+        WHERE userName = #{userName};
+    </update>
+
 </mapper>

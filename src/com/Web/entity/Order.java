@@ -3,29 +3,39 @@ package com.Web.entity;
 import java.util.Date;
 
 public class Order {
-    private String orderId;
-    private String totalPrice;
-    private int orderState;  //订单状态（0 未付款，1 已支付，2 已发货，3 订单取消）
-    private Date creationTime;  //订单创建时间
-    private Date payTime;       //订单支付时间
-    private Date shipTime;      //发货时间
-    private Date receiptTime;   //收件时间
-    private Date receiptName;   //收件人
+    private int orderId;
+    private int userId;
+    private double totalPrice;
+    private int orderState;
+    private String userAddress;
+    private String creationTime;
+    private String payTime;
+    private String shipTime;
+    private String receiptTime;
+    private String receiptName;
 
-    public String getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(String totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public int getOrderState() {
@@ -36,43 +46,51 @@ public class Order {
         this.orderState = orderState;
     }
 
-    public Date getCreationTime() {
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    public String getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Date creationTime) {
+    public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
     }
 
-    public Date getPayTime() {
+    public String getPayTime() {
         return payTime;
     }
 
-    public void setPayTime(Date payTime) {
+    public void setPayTime(String payTime) {
         this.payTime = payTime;
     }
 
-    public Date getShipTime() {
+    public String getShipTime() {
         return shipTime;
     }
 
-    public void setShipTime(Date shipTime) {
+    public void setShipTime(String shipTime) {
         this.shipTime = shipTime;
     }
 
-    public Date getReceiptTime() {
+    public String getReceiptTime() {
         return receiptTime;
     }
 
-    public void setReceiptTime(Date receiptTime) {
+    public void setReceiptTime(String receiptTime) {
         this.receiptTime = receiptTime;
     }
 
-    public Date getReceiptName() {
+    public String getReceiptName() {
         return receiptName;
     }
 
-    public void setReceiptName(Date receiptName) {
+    public void setReceiptName(String receiptName) {
         this.receiptName = receiptName;
     }
 }

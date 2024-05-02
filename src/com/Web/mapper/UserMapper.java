@@ -6,8 +6,10 @@ import com.Web.entity.User;
  * 用户接口类
  */
 public interface UserMapper {
-    public User queryUserByName(String userName);
-    public int insertUser(User user);
-    public int updateUserInfo(User user);
-    public int updateUserPassword(User user);
+    User queryUserByName(String userName);
+    int insertUser(User user);
+    int updateUserInfo(User user);
+    int updateUserPassword(User user);
+    int updateBalance(User user);
+
 }

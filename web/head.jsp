@@ -2,12 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
     <link href="css/bootstrap.min5.3.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
-<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.jsp">网上商城</a>
@@ -23,8 +21,12 @@
                     <a class="nav-link <%= request.getRequestURI().endsWith("shequ.jsp") ? "active" : "" %>" href="#">社区</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link <%= request.getRequestURI().endsWith("all.jsp") ? "active" : "" %>" href="all.jsp">全部商品</a>
+                </li>
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle <%= request.getRequestURI().endsWith("123.jsp") ? "active" : "" %>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle <%= request.getRequestURI().endsWith("category.jsp") ? "active" : "" %>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         分类
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -49,10 +51,11 @@
                         用户名
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="userinfo">
-                        <li><a class="dropdown-item" href="http://localhost:80/Web/userInfoUpdate">用户信息</a></li>
-                        <li><a class="dropdown-item" href="#">设置</a></li>
-                        <li><a class="dropdown-item" href="http://localhost:80/Web/login.jsp">登录</a></li>
-                        <li><a class="dropdown-item" href="http://localhost:80/Web/logout">退出</a></li>
+                        <li><a class="dropdown-item" href="userInfoUpdate">用户信息</a></li>
+                        <li><a class="dropdown-item balance" aria-labelledby="balance" href="">0.00</a></li>
+                        <li><a class="dropdown-item" href="order.jsp">订单</a></li>
+                        <li><a class="dropdown-item" href="login.jsp">登录</a></li>
+                        <li><a class="dropdown-item" href="logout">退出</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -70,22 +73,27 @@
 <%
     User user = (User) session.getAttribute("user");
     String userName = user != null ? user.getUserName() : "";
+    Double balance = (Double) session.getAttribute("balance");
+    System.out.println(balance);
+    int userId = user != null ? user.getUserId() : 0;
 %>
 
 <script>
     $(document).ready(function () {
         var userName = '<%= userName %>'; // 将用户名传递给 JavaScript 变量
+        var balance = parseFloat('<%= balance %>');
         if (userName) {
             $("#userinfo").text(userName); // 更新导航栏中的用户名
+            $(".balance").text(balance.toFixed(2) + "￥").show(); // 更新导航栏中的余额
             $(".dropdown-menu .dropdown-item:contains('退出')").show(); // 显示退出按钮
             $(".dropdown-menu .dropdown-item:contains('登录')").hide(); // 隐藏登录按钮
         } else {
             $("#userinfo").text("未登录"); // 更新导航栏中的文本为"未登录"
+            $(".balance").hide();         //隐藏余额字段
             $(".dropdown-menu .dropdown-item:contains('退出')").hide(); // 隐藏退出按钮
             $(".dropdown-menu .dropdown-item:contains('登录')").show(); // 显示登录按钮
         }
     });
 
 </script>
-</body>
 </html>

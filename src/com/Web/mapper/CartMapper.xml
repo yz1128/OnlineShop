@@ -6,8 +6,8 @@
     <!-- useGeneratedKeys="ture" 把新增加的主键赋值到自己定义的keyProperty(id)中 -->
 
     <insert id="insertCart" parameterType="com.Web.entity.Cart">
-        INSERT INTO cart (goodsName,userName,factory,image,unitPrice,Numb)
-        SELECT #{goodsName},#{userName},factory,image,unitPrice,1
+        INSERT INTO cart (goodsName,userName,factory,image,unitPrice,Numb,userId)
+        SELECT #{goodsName},#{userName},factory,image,unitPrice,1,#{userId}
         FROM goods
         WHERE goodsName = #{goodsName}
     </insert>
@@ -33,11 +33,16 @@
         select * from cart where userName = #{userName}
     </select>
 
-    <update id="deleteByName" parameterType="map">
-        UPDATE cart
-        SET Numb = Numb - 1
+    <delete id="deleteByName" parameterType="com.Web.entity.Cart">
+        DELETE FROM cart
         WHERE userName = #{userName} AND goodsName = #{goodsName}
-    </update>
+    </delete>
+
+    <delete id="deleteAllByName" parameterType="com.Web.entity.Cart">
+        DELETE FROM cart
+        WHERE userName = #{userName}
+    </delete>
+
 
 
 

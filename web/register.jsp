@@ -4,7 +4,7 @@
     <title>注册页面</title>
     <link rel="stylesheet" href="css/table.css">
 </head>
-<body>
+<body style="background-color: #E8E1DF;">
     <%@include file="head.jsp"%>
         <div class="center">
             <form class="form" action="register" method="post" id="registerForm">

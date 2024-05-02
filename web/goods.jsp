@@ -9,8 +9,9 @@
 <html>
 <head>
     <title>${goods.goodsName}</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body style="background-color: #E8E1DF;">
 
 <!-- TODO(Yanz,2024/4/26 下午11:39): 显示商品的详情页 -->
 

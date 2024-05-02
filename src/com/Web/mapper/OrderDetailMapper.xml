@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 首先来解析 namespace：命名空间，此属性通常用来映射Dao(mapper)层接口 -->
+<mapper namespace="com.Web.mapper.OrderDetailMapper">
+
+    <insert id="insertOrderDetail" parameterType="com.Web.entity.OrderDetail">
+        INSERT INTO orderdetail (orderId, userId, goodsId, orderNumb)
+        VALUES (#{orderId}, #{userId}, #{goodsId}, #{orderNumb})
+    </insert>
+
+</mapper>

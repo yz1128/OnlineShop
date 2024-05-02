@@ -7,8 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title></title>
     <style>
         html, body {
             height: 100%;
@@ -30,13 +28,10 @@
             margin-top: auto; /* 将 footer 推到页面底部 */
         }
     </style>
-</head>
-<body>
-<!-- 底部信息 -->
 <!-- TODO(Yanz,2024/4/26 下午11:37): 完善一下footer的内容 -->
 <div class="footer">
     <p>&copy; 2024 Online Store. All Rights Reserved.</p>
 </div>
 
-</body>
+
 </html>

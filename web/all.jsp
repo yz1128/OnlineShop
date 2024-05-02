@@ -1,34 +1,32 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Yanz
-  Date: 2024/4/29
-  Time: 下午3:57
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>分类</title>
+    <meta charset="UTF-8">
+    <title>网上商城</title>
+    <link href="css/bootstrap.min5.3.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body style="background-color: #E8E1DF;">
-<%@include file="head.jsp"%>
+<!-- 导航栏 -->
+<%@include file="head.jsp" %>
 
+<!-- 商品展示 -->
 <div class="shop">
+    <!-- 商品列表 -->
     <div id="product-container" class="product-container" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
         <!-- 商品列表 -->
     </div>
 </div>
 
-<%@include file="footer.jsp"%>
+<!-- 底部信息 -->
+<%@include file="footer.jsp" %>
 
 <!-- 在页面底部固定位置创建一个容器用于显示 Toast 通知 -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <!-- 这里将放置 Toast 通知 -->
 </div>
-<%
-    String category = (String) request.getParameter("category");
-%>
+
 
 <%-- 异步加载商品数据 --%>
 <script>
@@ -36,7 +34,7 @@
         // 发起 AJAX 请求获取商品数据
         $.ajax({
             type: "POST",
-            url: "categoryServlet?category=<%= category %>",
+            url: "listAllServlet",
             dataType: "json",
             success: function(data) {
                 // 成功获取数据后，更新页面内容
@@ -64,7 +62,7 @@
                 $(".add-to-cart-btn").click(function() {
                     var goodsName = $(this).data("product-name"); // 获取商品名称
                     var userName = '<%= userName %>';
-                    var userId = '<%= userId %>';
+                    var userId = '<%= userId %>'
                     if (isEmpty(userName)) {
                         window.location.href = "login.jsp"; // 重定向到登录页面
                         return;
@@ -80,7 +78,6 @@
                         },
                         error: function(xhr, status, error) {
                             // 处理添加到购物车失败的情况（如果需要）
-                            console.error("Error adding product to cart:", error);
                             showToast(goodsName); // 显示 Toast 通知
                         }
                     });
@@ -96,7 +93,6 @@
     function isEmpty(userName) {
         return userName.length === 0;
     }
-
     function showToast(goodsName) {
         // 创建 Toast 通知
         var toast = $("<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>" +
@@ -124,5 +120,6 @@
         });
     }
 </script>
+
 </body>
 </html>

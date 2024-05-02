@@ -16,17 +16,15 @@ public class deleteCartServlet extends HttpServlet {
     public CartService cartService = new CartService();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
         // 接收客户端的请求（接受参数：姓名、密码）
         String userName = request.getParameter("userName");
         String goodsName = request.getParameter("goodsName");
-
         //调用userService进行数据库的修改
             MessageModel messageModel = cartService.deleteByName(userName,goodsName);
-            messageModel = cartService.queryByName(userName,goodsName);
-            request.setAttribute("messageModel", messageModel);
+
             // 转换为 JSON 格式
             Gson gson = new Gson();
             String json = gson.toJson(messageModel.getObject());
@@ -35,7 +33,6 @@ public class deleteCartServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.print(json);
             out.flush();
-        //TODO(Yanz,2024/4/30 上午12:00):购物车删除商品
 
     }
 
