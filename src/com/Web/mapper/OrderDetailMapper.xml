@@ -8,4 +8,23 @@
         VALUES (#{orderId}, #{userId}, #{goodsId}, #{orderNumb})
     </insert>
 
+    <select id="queryOrderDetailsByOrderId" resultType="com.Web.entity.OrderDetail">
+        SELECT
+            od.orderId,
+            od.orderNumb,
+            g.goodsName,
+            g.unitPrice,
+            od.orderNumb * g.unitPrice AS totalPrice,
+            g.factory,
+            o.userAddress,
+            o.receiptName,
+            g.image
+        FROM
+            orderdetail od
+                INNER JOIN goods g ON od.goodsId = g.goodsId
+                INNER JOIN `order` o ON od.orderId = o.orderId
+        WHERE
+            od.orderId = #{orderId}
+    </select>
+
 </mapper>

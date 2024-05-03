@@ -6,8 +6,7 @@ import com.Web.mapper.*;
 import com.Web.util.GetSqlSession;
 import org.apache.ibatis.session.SqlSession;
 
-import javax.servlet.http.HttpSession;
-import javax.servlet.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 import java.util.List;
@@ -110,4 +109,47 @@ public class OrderService {
         return messageModel;
     }
 
+    public MessageModel queryOrderByUserName(String userName) {
+        MessageModel messageModel = new MessageModel();
+        SqlSession session = GetSqlSession.createSqlSession();
+        List<OrderDetailWithGoods> orderDetailsWithGoods = new ArrayList<>();
+
+        try {
+            OrderMapper orderMapper = session.getMapper(OrderMapper.class);
+            OrderDetailMapper orderDetailMapper = session.getMapper(OrderDetailMapper.class);
+            GoodsMapper goodsMapper = session.getMapper(GoodsMapper.class);
+
+            // 根据用户名查询订单
+            List<Order> orders = orderMapper.queryOrdersByUserName(userName);
+
+            // 遍历每个订单，查询订单详情和商品信息
+            for (Order order : orders) {
+                List<OrderDetail> orderDetails = orderDetailMapper.queryOrderDetailsByOrderId(order.getOrderId());
+                for (OrderDetail orderDetail : orderDetails) {
+                    Goods goods = goodsMapper.queryByGoodsId(orderDetail.getGoodsId());
+                    OrderDetailWithGoods detailWithGoods = new OrderDetailWithGoods();
+                    detailWithGoods.setOrderId(order.getOrderId());
+                    detailWithGoods.setGoodsId(orderDetail.getGoodsId());
+                    detailWithGoods.setGoodsName(goods.getGoodsName());
+                    detailWithGoods.setFactory(goods.getFactory());
+                    detailWithGoods.setUnitPrice(goods.getUnitPrice());
+                    detailWithGoods.setImage(goods.getImage());
+                    detailWithGoods.setUnitPrice(goods.getUnitPrice());
+                    orderDetailsWithGoods.add(detailWithGoods);
+                }
+            }
+
+            // 设置查询结果到消息模型
+            messageModel.setObject(orderDetailsWithGoods);
+            messageModel.setCode(1);
+            messageModel.setMsg("查询成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            messageModel.setCode(0);
+            messageModel.setMsg("查询失败，发生异常：" + e.getMessage());
+        } finally {
+            session.close();
+        }
+        return messageModel;
+    }
 }

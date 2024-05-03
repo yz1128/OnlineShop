@@ -153,11 +153,16 @@
                 // 为结算按钮添加点击事件处理程序
                 $(".submit").click(function() {
                     var userName = '<%= userName %>'; // 获取用户名
-                    var balance = '<%= balance %>'
+                    var balance = '<%= balance %>';
+                    if (goodslength === 0){
+                        var msg = ("当前购物车内无商品！");
+                        wrongToast(msg);
+                        return;
+                    }
                     if (balance < totalAmount) {
                         // 如果余额不足弹窗
                         var msg = ("当前余额：" + balance + "余额不足，请充值或减少购物车商品数量！");
-                        wrongToast(msg)
+                        wrongToast(msg);
                         return; // 终止事件处理程序，不执行后续的 AJAX 请求
                     }else{
                         balance = balance - totalAmount;

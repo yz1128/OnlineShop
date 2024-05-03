@@ -1,24 +1,20 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>网上商城</title>
+    <title>订单</title>
+    <link href="css/bootstrap.min5.3.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<%@include file="head.jsp"%>
-<body  style="background-color: #E8E1DF;">
+<body style="background-color: #E8E1DF;">
 <!-- 导航栏 -->
-<%
-    if (session.getAttribute("user") == null) {
-        // 如果 session 不存在或者用户数据为空，则重定向到 login.jsp 页面
-        response.sendRedirect("login.jsp");
-    }
-%>
+<%@include file="head.jsp" %>
+
 
 <div class="shop">
     <div class="row" id="goods" style="width: 1202px;  padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0; border-left-width: 0; border-right-width: 0;">
-        <div class="col-12 goodslength"></div>
+        <div class="col-12 "></div>
         <div class="col-2" style="border-bottom-width: 15px; margin-bottom: 12px;">
         </div>
         <div class="col-2">
@@ -37,11 +33,10 @@
             <p>金额</p>
         </div>
         <div class="col-1">
-            <p>操作</p>
         </div>
         <%--  商品信息  --%>
         <div  id="product-container">
-
+            <%--    在此插入商品信息    --%>
         </div>
         <div class="col-2" style="border-bottom-width: 15px; margin-bottom: 12px;">
         </div>
@@ -56,226 +51,53 @@
             <h4 class="Sum" style="color: red;font-weight: bold;margin-top: 8px;"> </h4>
         </div>
         <div class="col-1" >
-            <button type="button" class="btn btn-warning submit">结算</button>
         </div>
     </div>
 </div>
 
+
+
+
 <!-- 底部信息 -->
-<%@include file="footer.jsp"%>
-
-
-
-<!-- 在页面底部固定位置创建一个容器用于显示 Toast 通知 -->
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <!-- 这里将放置 Toast 通知 -->
-</div>
-
-<%-- 异步加载商品数据 --%>
-
+<%@include file="footer.jsp" %>
 <script>
     $(document).ready(function() {
-        var userName = '<%= userName %>';
-        // 声明变量存储总金额
-        var totalAmount = 0;
-        // 发起 AJAX 请求获取商品数据
         $.ajax({
             type: "POST",
-            url: "showCartServlet",
-            data: {userName: userName},
+            url: "orderServlet",
             dataType: "json",
+            data:{userName:userName},
             success: function(data) {
-                // 成功获取数据后，更新页面内容
-                var products = data; // 假设返回的数据是商品对象数组
+                var orderDetailsWithGoods = data.object; // 假设返回的数据是 orderDetailsWithGoods 对象数组
                 var container = $("#product-container");
-                var goodslength = 0; // 记录商品数量的
                 container.empty(); // 清空容器
-                // 遍历商品数据，生成 HTML 内容并添加到容器中
-                if (products == null){
-                    var html =  "<div class='col-12 border-bottom' style='text-align: center;color: red;'><h4>购物车里没商品，快去采购吧！</h4></div>"
+
+                // 遍历订单详情和商品信息
+                for (var i = 0; i < orderDetailsWithGoods.length; i++) {
+                    var detailWithGoods = orderDetailsWithGoods[i];
+                    // 创建订单详情和商品信息的 HTML 元素
+                    var html = "<div class='order-detail'>";
+                    html += "<p>商品名称：" + detailWithGoods.goodsName + "</p>";
+                    html += "<p>单价：" + detailWithGoods.unitPrice + "</p>";
+                    html += "<p>数量：" + detailWithGoods.Numb + "</p>";
+                    // 其他字段的展示...
+                    html += "</div>";
+                    // 将 HTML 元素添加到容器中
                     container.append(html);
-                }else{
-                    for (var i = 0; i < products.length; i++) {
-                        var product = products[i];
-                        var amount = product.unitPrice * product.Numb; // 计算商品金额
-                        totalAmount += amount;  // 累加到总金额中
-                        goodslength += 1;       // 记录商品数量的
-                        var html =  "<div class='row goods' style='width: 1202px;'>" +
-                                    "<div class='col-12'><h5>" + product.factory + "</h5></div>" +
-                                    "<div class='col-2' style='border-bottom-width: 15px; margin-bottom: 12px;'>" +
-                                    "<img src='image/" + product.image + "' alt='Product Image' style='width: 150px; height: 150px;'>" +
-                                    "</div>" +
-                                    "<div class='col-2'><p>" + product.goodsName + "</p></div>" +
-                                    "<div class='col-3'> <p>        </p> </div>" +
-                                    "<div class='col-1'> <p>￥" + product.unitPrice + "</p> </div>" +
-                                    "<div class='col-1'> <p>" + product.Numb + "</p> </div>" +
-                                    "<div class='col-2'> <p>￥" + product.unitPrice * product.Numb + "</p> </div>" +
-                                    "<div class='col-1'> <button class='Delete-btn' data-product-name='" + product.goodsName + "'>移出</button> </div>" +
-                                    "</div>";
-                        // 添加到容器
-                        container.append(html);
-                    }
                 }
-
-                // 更新总金额显示
-                $(".Sum").text(totalAmount.toFixed(2));
-                $(".goodslength").html("<h4>购物车(全部"+ goodslength + "件)<h4>");
-
-
-                // 为每个 "Delete-btn" 按钮添加点击事件处理程序
-                $(".Delete-btn").click(function() {
-                    var goodsName = $(this).data("product-name"); // 获取商品名称
-                    var userName = '<%= userName %>';
-                    if (isEmpty(userName)) {
-                        window.location.href = "login.jsp"; // 重定向到登录页面
-                    }
-                    // 发起 AJAX 请求将商品删除
-                    $.ajax({
-                        type: "POST",
-                        url: "deleteCartServlet", // 假设存在一个用于处理删除购物车请求的 Servlet
-                        data: { goodsName, userName: goodsName, userName }, // 将商品名称作为请求参数发送到服务器
-                        success: function(response) {
-                            // 处理删除购物车成功的情况（如果需要）
-                            showToast(goodsName); // 显示 Toast 通知
-                            // 从页面中删除相应的商品元素
-                            setTimeout(function() {
-                                location.reload();
-                            },1000);
-                            // 更新总金额
-                            totalAmount -= amount;
-                            $(".Sum").text(totalAmount.toFixed(2));
-                            $(".goodslength").html("<h4>购物车(全部"+ goodslength + "件)<h4>");
-                        },
-                        error: function(xhr, status, error) {
-                            // 处理删除购物车失败的情况（如果需要）
-                            showToast(goodsName); // 显示 Toast 通知
-                        }
-                    });
-                });
-                // 为结算按钮添加点击事件处理程序
-                $(".submit").click(function() {
-                    var userName = '<%= userName %>'; // 获取用户名
-                    var balance = '<%= balance %>'
-                    if (balance < totalAmount) {
-                        // 如果余额不足弹窗
-                        var msg = ("当前余额：" + balance + "余额不足，请充值或减少购物车商品数量！");
-                        wrongToast(msg)
-                        return; // 终止事件处理程序，不执行后续的 AJAX 请求
-                    }else{
-                        balance = balance - totalAmount;
-                    }
-                    // 发起 AJAX 请求调用 insertOrderServlet，并传递用户名作为参数
-                    $.ajax({
-                        type: "POST",
-                        url: "insertOrderServlet", // 假设存在一个用于处理结算请求的 Servlet
-                        data: { userName: userName }, // 将用户名作为请求参数发送到服务器
-                        success: function(response) {
-                            // 处理结算成功的情况（如果需要）
-                            submitToast(totalAmount,balance);
-
-                            // 刷新页面
-                            setTimeout(function() {
-                                location.reload();
-                            },1000);
-                        },
-                        error: function(xhr, status, error) {
-                            // 处理结算失败的情况（如果需要）
-                            console.error("Error:", error);
-                        }
-                    });
-                });
             },
             error: function(xhr, status, error) {
-                // 处理错误情况
                 console.error("Error:", error);
             }
         });
     });
-
-    function isEmpty(userName) {
-        return userName.length === 0;
-    }
-
-    function showToast(goodsName) {
-        // 创建 Toast 通知
-        var toast = $("<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>" +
-            "<div class='toast-header'>" +
-            "<strong class='me-auto'>购物车消息</strong>" +
-            "<button type='button' class='btn-close' data-bs-dismiss='toast' aria-label='Close'></button>" +
-            "</div>" +
-            "<div class='toast-body'>" +
-            "商品：" + goodsName + " 已删除" +
-            "</div>" +
-            "</div>");
-
-        // 将 Toast 元素添加到容器中
-        $(".toast-container").append(toast);
-
-        // 初始化 Toast
-        var bsToast = new bootstrap.Toast(toast[0]);
-
-        // 显示 Toast
-        bsToast.show();
-
-        // 监听 Toast 隐藏事件，以便在 Toast 隐藏后从 DOM 中移除
-        toast.on("hidden.bs.toast", function () {
-            toast.remove();
-        });
-    }
-    function submitToast(totalAmount,balance) {
-        // 创建 Toast 通知
-        var subtoast = $("<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>" +
-            "<div class='toast-header'>" +
-            "<strong class='me-auto'>购物车消息</strong>" +
-            "<button type='button' class='btn-close' data-bs-dismiss='toast' aria-label='Close'></button>" +
-            "</div>" +
-            "<div class='toast-body'>" +
-            "结算完毕，共消费" + totalAmount + "元，" + "当前余额：" + balance + "元" +
-            "</div>" +
-            "</div>");
-
-        // 将 Toast 元素添加到容器中
-        $(".toast-container").append(subtoast);
-
-        // 初始化 Toast
-        var subToast = new bootstrap.Toast(subtoast[0]);
-
-        // 显示 Toast
-        subToast.show();
-
-        // 监听 Toast 隐藏事件，以便在 Toast 隐藏后从 DOM 中移除
-        subtoast.on("hidden.sub.toast", function () {
-            subtoast.remove();
-        });
-    }
-    function wrongToast(msg) {
-        // 创建 Toast 通知
-        var wgtoast = $("<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>" +
-            "<div class='toast-header'>" +
-            "<strong class='me-auto'>购物车消息</strong>" +
-            "<button type='button' class='btn-close' data-bs-dismiss='toast' aria-label='Close'></button>" +
-            "</div>" +
-            "<div class='toast-body'>" +
-             msg +
-            "</div>" +
-            "</div>");
-
-        // 将 Toast 元素添加到容器中
-        $(".toast-container").append(wgtoast);
-
-        // 初始化 Toast
-        var wrToast = new bootstrap.Toast(wgtoast[0]);
-
-        // 显示 Toast
-        wrToast.show();
-
-        // 监听 Toast 隐藏事件，以便在 Toast 隐藏后从 DOM 中移除
-        wgtoast.on("hidden.wr.toast", function () {
-            wgtoast.remove();
-        });
-    }
 </script>
+
+
+
+
+
+
 </body>
 </html>
-
 

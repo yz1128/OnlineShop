@@ -1,30 +1,27 @@
 package com.Web.controller;
 
-import com.google.gson.Gson;
+import com.Web.entity.OrderDetail;
 import com.Web.entity.vo.MessageModel;
-import com.Web.service.GoodsService;
+import com.Web.service.OrderService;
+import com.google.gson.Gson;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "listServlet", value = "/listServlet")
-public class listServlet extends HttpServlet {
-    protected GoodsService goodsService = new GoodsService();
-
+@WebServlet(name = "orderServlet", value = "/orderServlet")
+public class orderServlet extends HttpServlet {
+    OrderService orderService = new OrderService();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-
+        String userName = request.getParameter("userName");
         // 创建一个消息模型对象
-        MessageModel messageModel = goodsService.listGoods();
+        MessageModel messageModel = orderService.queryOrderByUserName(userName);
 
         // 转换为 JSON 格式
         Gson gson = new Gson();
@@ -35,9 +32,8 @@ public class listServlet extends HttpServlet {
         out.print(json);
         out.flush();
     }
-
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
 }

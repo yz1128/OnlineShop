@@ -5,10 +5,35 @@
     <!-- id:对应Dao(mapper)层接口方法名 parameterType：指定输入类型 -->
     <!-- useGeneratedKeys="ture" 把新增加的主键赋值到自己定义的keyProperty(id)中 -->
 
-    <!-- TODO(Yanz,2024/5/2 下午1:34): 添加OrderMapper -->
     <insert id="insertOrder" parameterType="com.Web.entity.Order">
         INSERT INTO `order` (orderId, userId, totalPrice, userAddress, receiptName)
         VALUES (#{orderId}, #{userId}, #{totalPrice}, #{userAddress}, #{receiptName})
     </insert>
+
+    <select id="queryOrdersByUserName" resultType="com.Web.entity.OrderDetailWithGoods">
+            SELECT
+                o.orderId,
+                od.orderNumb,
+                g.unitPrice,
+                od.orderNumb * g.unitPrice AS totalPrice,
+                g.goodsName,
+                g.factory,
+                o.userAddress,
+                o.receiptName,
+                g.image
+            FROM
+                order o
+                    INNER JOIN orderdetail od ON o.orderId = od.orderId
+                    INNER JOIN goods g ON od.goodsId = g.goodsId
+            WHERE
+                o.userId = (
+                    SELECT
+                        userId
+                    FROM
+                        user
+                    WHERE
+                        userName = #{userName}
+                )
+    </select>
 
 </mapper>
