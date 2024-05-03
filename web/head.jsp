@@ -5,6 +5,8 @@
     <link href="css/bootstrap.min5.3.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <script src="js/bootstrap.bundle.min5.3.js"></script>
+    <script src="js/jquery-3.7.1.js"></script>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -66,9 +68,6 @@
 </nav>
 
 <!--  -->
-<script src="js/bootstrap.bundle.min5.3.js"></script>
-<script src="js/jquery-3.7.1.js"></script>
-
 <%
     User user = (User) session.getAttribute("user");
     String userName = user != null ? user.getUserName() : "";
@@ -78,7 +77,6 @@
     }
     int userId = user != null ? user.getUserId() : 0;
 %>
-<!-- TODO(Yanz,2024/5/3 上午1:20): -->
 <script>
     $(document).ready(function () {
         var userName = '<%= userName %>'; // 将用户名传递给 JavaScript 变量

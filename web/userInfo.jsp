@@ -20,7 +20,7 @@
 
 <!-- 用户信息 -->
 <div class="center">
-    <form class="form" action="infoUpdateServlet" method="post">
+    <form class="form" action="infoUpdateServlet" method="post" id="userInfoForm">
         <table class="table" >
             <tr>
                 <td></td>
@@ -30,6 +30,11 @@
             <tr>
                 <td class="right"><label for="userName">用户名：</label> </td>
                 <td><input type="text" name="userName" id="userName" value="${user.userName}" readonly> </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="balance">余额：</label> </td>
+                <td><input type="text" name="balance" id="balance" value="${user.balance}" readonly> </td>
                 <td></td>
             </tr>
             <tr>
@@ -116,7 +121,7 @@
             return;
         }
         //如果都不为空，则手动提交表单
-        $("#registerForm").submit();
+        $("#userInfoForm").submit();
     });
     function isEmpty(str){
         if (str === null || str.trim() === "") {

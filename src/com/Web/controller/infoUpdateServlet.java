@@ -31,7 +31,7 @@ public class infoUpdateServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", messageModel.getObject());
             // 重定向到用户信息界面
-            response.sendRedirect("userInfo.jsp"); // 改动：直接重定向到用户信息的JSP页面
+            response.sendRedirect("userInfo.jsp"); // 直接重定向到用户信息的JSP页面
         } else { // 修改失败
             // 将消息模型对象设置到request作用域中
             request.setAttribute("messageModel", messageModel);

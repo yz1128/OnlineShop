@@ -48,14 +48,13 @@
 
 <!-- 底部信息 -->
 <%@include file="footer.jsp" %>
+<!-- 在页面底部固定位置创建一个容器用于显示 Toast 通知 -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
   <!-- 这里将放置 Toast 通知 -->
 </div>
+
+
 <script>
-  <!-- 在页面底部固定位置创建一个容器用于显示 Toast 通知 -->
-
-
-
 
   $(document).ready(function() {
     // 发起 AJAX 请求获取商品数据

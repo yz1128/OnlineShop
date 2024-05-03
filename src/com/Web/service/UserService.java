@@ -146,6 +146,8 @@ public class UserService {
             int rowsAffected = userMapper.updateUserInfo(u);
             session.commit();
             if (rowsAffected > 0) {
+                User user = userMapper.queryUserByName(userName);
+                messageModel.setObject(user);
                 messageModel.setCode(1);
                 messageModel.setMsg("修改成功！");
             } else {

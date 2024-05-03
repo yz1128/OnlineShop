@@ -6,9 +6,10 @@
     <title>网上商城</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+<!-- 导航栏 -->
 <%@include file="head.jsp"%>
 <body  style="background-color: #E8E1DF;">
-<!-- 导航栏 -->
+
 <%
     if (session.getAttribute("user") == null) {
         // 如果 session 不存在或者用户数据为空，则重定向到 login.jsp 页面
@@ -64,15 +65,12 @@
 <!-- 底部信息 -->
 <%@include file="footer.jsp"%>
 
-
-
 <!-- 在页面底部固定位置创建一个容器用于显示 Toast 通知 -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <!-- 这里将放置 Toast 通知 -->
 </div>
 
 <%-- 异步加载商品数据 --%>
-
 <script>
     $(document).ready(function() {
         var userName = '<%= userName %>';
@@ -277,5 +275,3 @@
 </script>
 </body>
 </html>
-
-

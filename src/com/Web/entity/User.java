@@ -4,7 +4,7 @@ package com.Web.entity;
  * User实体类
  */
 public class User {
-    private Integer userId;
+    private int userId;
     private String userName;
     private String userPassword;
     private String ConfirmPassword;
@@ -48,11 +48,11 @@ public class User {
         this.newUserPassword2 = newUserPassword2;
     }
 
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
