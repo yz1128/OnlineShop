@@ -18,7 +18,7 @@
 
 <div class="shop">
     <div class="row" id="goods" style="width: 1202px;  padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0; border-left-width: 0; border-right-width: 0;">
-        <div class="col-12 goodslength"><h4>购物车(全部1件)</h4></div>
+        <div class="col-12 goodslength"></div>
         <div class="col-2" style="border-bottom-width: 15px; margin-bottom: 12px;">
         </div>
         <div class="col-2">
@@ -72,6 +72,7 @@
 </div>
 
 <%-- 异步加载商品数据 --%>
+
 <script>
     $(document).ready(function() {
         var userName = '<%= userName %>';
@@ -118,7 +119,7 @@
 
                 // 更新总金额显示
                 $(".Sum").text(totalAmount.toFixed(2));
-                $(".goodslength").val("购物车(全部"+ goodslength + "件)");
+                $(".goodslength").html("<h4>购物车(全部"+ goodslength + "件)<h4>");
 
 
                 // 为每个 "Delete-btn" 按钮添加点击事件处理程序
@@ -128,7 +129,7 @@
                     if (isEmpty(userName)) {
                         window.location.href = "login.jsp"; // 重定向到登录页面
                     }
-                    // 发起 AJAX 请求将商品添加到购物车
+                    // 发起 AJAX 请求将商品删除
                     $.ajax({
                         type: "POST",
                         url: "deleteCartServlet", // 假设存在一个用于处理删除购物车请求的 Servlet
@@ -137,13 +138,13 @@
                             // 处理删除购物车成功的情况（如果需要）
                             showToast(goodsName); // 显示 Toast 通知
                             // 从页面中删除相应的商品元素
-                            setTimeout(function() {// 刷新页面
+                            setTimeout(function() {
                                 location.reload();
-                            });
+                            },1000);
                             // 更新总金额
                             totalAmount -= amount;
                             $(".Sum").text(totalAmount.toFixed(2));
-                            $(".goodslength").val("购物车(全部"+ goodslength + "件)");
+                            $(".goodslength").html("<h4>购物车(全部"+ goodslength + "件)<h4>");
                         },
                         error: function(xhr, status, error) {
                             // 处理删除购物车失败的情况（如果需要）
@@ -154,14 +155,15 @@
                 // 为结算按钮添加点击事件处理程序
                 $(".submit").click(function() {
                     var userName = '<%= userName %>'; // 获取用户名
-                    var banlance = '<%= balance %>'
-                    if (banlance < totalAmount) {
+                    var balance = '<%= balance %>'
+                    if (balance < totalAmount) {
                         // 如果余额不足弹窗
-                        var msg = ("余额不足，请充值或减少购物车商品数量！");
+                        var msg = ("当前余额：" + balance + "余额不足，请充值或减少购物车商品数量！");
                         wrongToast(msg)
                         return; // 终止事件处理程序，不执行后续的 AJAX 请求
+                    }else{
+                        balance = balance - totalAmount;
                     }
-                    banlance = banlance - totalAmount;
                     // 发起 AJAX 请求调用 insertOrderServlet，并传递用户名作为参数
                     $.ajax({
                         type: "POST",
@@ -169,12 +171,12 @@
                         data: { userName: userName }, // 将用户名作为请求参数发送到服务器
                         success: function(response) {
                             // 处理结算成功的情况（如果需要）
-                            submitToast(totalAmount);
+                            submitToast(totalAmount,balance);
 
                             // 刷新页面
                             setTimeout(function() {
                                 location.reload();
-                            });
+                            },1000);
                         },
                         error: function(xhr, status, error) {
                             // 处理结算失败的情况（如果需要）
@@ -220,35 +222,35 @@
             toast.remove();
         });
     }
-    function submitToast(totalAmount) {
+    function submitToast(totalAmount,balance) {
         // 创建 Toast 通知
-        var toast = $("<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>" +
+        var subtoast = $("<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>" +
             "<div class='toast-header'>" +
             "<strong class='me-auto'>购物车消息</strong>" +
             "<button type='button' class='btn-close' data-bs-dismiss='toast' aria-label='Close'></button>" +
             "</div>" +
             "<div class='toast-body'>" +
-            "结算完毕，共消费" + totalAmount + "元" +
+            "结算完毕，共消费" + totalAmount + "元，" + "当前余额：" + balance + "元" +
             "</div>" +
             "</div>");
 
         // 将 Toast 元素添加到容器中
-        $(".toast-container").append(toast);
+        $(".toast-container").append(subtoast);
 
         // 初始化 Toast
-        var subToast = new bootstrap.Toast(toast[0]);
+        var subToast = new bootstrap.Toast(subtoast[0]);
 
         // 显示 Toast
         subToast.show();
 
         // 监听 Toast 隐藏事件，以便在 Toast 隐藏后从 DOM 中移除
-        toast.on("hidden.sub.toast", function () {
-            toast.remove();
+        subtoast.on("hidden.sub.toast", function () {
+            subtoast.remove();
         });
     }
     function wrongToast(msg) {
         // 创建 Toast 通知
-        var toast = $("<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>" +
+        var wgtoast = $("<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>" +
             "<div class='toast-header'>" +
             "<strong class='me-auto'>购物车消息</strong>" +
             "<button type='button' class='btn-close' data-bs-dismiss='toast' aria-label='Close'></button>" +
@@ -259,17 +261,17 @@
             "</div>");
 
         // 将 Toast 元素添加到容器中
-        $(".toast-container").append(toast);
+        $(".toast-container").append(wgtoast);
 
         // 初始化 Toast
-        var wrToast = new bootstrap.Toast(toast[0]);
+        var wrToast = new bootstrap.Toast(wgtoast[0]);
 
         // 显示 Toast
         wrToast.show();
 
         // 监听 Toast 隐藏事件，以便在 Toast 隐藏后从 DOM 中移除
-        toast.on("hidden.wr.toast", function () {
-            toast.remove();
+        wgtoast.on("hidden.wr.toast", function () {
+            wgtoast.remove();
         });
     }
 </script>

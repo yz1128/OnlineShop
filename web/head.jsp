@@ -52,7 +52,6 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="userinfo">
                         <li><a class="dropdown-item" href="userInfoUpdate">用户信息</a></li>
-                        <li><a class="dropdown-item balance" aria-labelledby="balance" href="">0.00</a></li>
                         <li><a class="dropdown-item" href="order.jsp">订单</a></li>
                         <li><a class="dropdown-item" href="login.jsp">登录</a></li>
                         <li><a class="dropdown-item" href="logout">退出</a></li>
@@ -73,23 +72,23 @@
 <%
     User user = (User) session.getAttribute("user");
     String userName = user != null ? user.getUserName() : "";
-    Double balance = (Double) session.getAttribute("balance");
-    System.out.println(balance);
+    Double balance = 0.00;
+    if (user != null){
+        balance = user.getBalance();
+    }
     int userId = user != null ? user.getUserId() : 0;
 %>
-
+<!-- TODO(Yanz,2024/5/3 上午1:20): -->
 <script>
     $(document).ready(function () {
         var userName = '<%= userName %>'; // 将用户名传递给 JavaScript 变量
         var balance = parseFloat('<%= balance %>');
         if (userName) {
             $("#userinfo").text(userName); // 更新导航栏中的用户名
-            $(".balance").text(balance.toFixed(2) + "￥").show(); // 更新导航栏中的余额
             $(".dropdown-menu .dropdown-item:contains('退出')").show(); // 显示退出按钮
             $(".dropdown-menu .dropdown-item:contains('登录')").hide(); // 隐藏登录按钮
         } else {
             $("#userinfo").text("未登录"); // 更新导航栏中的文本为"未登录"
-            $(".balance").hide();         //隐藏余额字段
             $(".dropdown-menu .dropdown-item:contains('退出')").hide(); // 隐藏退出按钮
             $(".dropdown-menu .dropdown-item:contains('登录')").show(); // 显示登录按钮
         }

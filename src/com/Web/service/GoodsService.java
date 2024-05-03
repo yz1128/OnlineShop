@@ -24,9 +24,9 @@ public class GoodsService {
 
         try {
             GoodsMapper goodsMapper = session.getMapper(GoodsMapper.class);
-            List<Goods> goodsList = goodsMapper.queryByGoodsName(goodsName);
+            List<Goods> searchList = goodsMapper.queryByGoodsName(goodsName);
 
-            messageModel.setObject(goodsList);
+            messageModel.setObject(searchList);
             messageModel.setCode(1);
             messageModel.setMsg("查询成功！");
         } catch (Exception e) {

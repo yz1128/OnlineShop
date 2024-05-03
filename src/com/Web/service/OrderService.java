@@ -72,7 +72,6 @@ public class OrderService {
             Cart c = new Cart();
             c.setUserName(user.getUserName());
             balance = balance - totalPrice;
-            System.out.println("userName + balance " +userName + balance);
             User u = new User();
             u.setUserName(userName);
             u.setBalance(balance);
@@ -80,13 +79,11 @@ public class OrderService {
 
             // 更新用户余额
             int rowsAffected4 = userMapper.updateBalance(u);
-            System.out.println("rowsAffected4" + rowsAffected4);
             // 如果更新余额成功，则插入订单和删除购物车中商品
             if (rowsAffected4 > 0) {
                 messageModel.setObject(balance);
                 int rowsAffected2 = orderMapper.insertOrder(o);
                 int rowsAffected3 = cartMapper.deleteAllByName(c);
-                System.out.println("rowsAffected2 + rowsAffected3" + rowsAffected2 + rowsAffected3);
                 // 如果订单插入和购物车删除都成功，则提交事务
                 if (rowsAffected2 > 0 && rowsAffected3 > 0) {
                     session.commit();
