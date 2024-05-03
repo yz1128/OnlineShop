@@ -36,4 +36,7 @@
                 )
     </select>
 
+    <select id="listAllOrder" parameterType="String" resultType="com.Web.entity.Order">
+        SELECT * FROM `order`;
+    </select>
 </mapper>

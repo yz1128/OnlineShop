@@ -7,4 +7,6 @@ import java.util.List;
 public interface OrderMapper {
     int insertOrder(Order order);
     List<Order> queryOrdersByUserName(String userName);
+    List<Order> listAllOrder();
+
 }
