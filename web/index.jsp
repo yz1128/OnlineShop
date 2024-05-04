@@ -67,7 +67,7 @@
         var products = data; // 假设返回的数据是商品对象数组
         var container = $("#product-container");
         container.empty(); // 清空容器
-
+        
         // 遍历商品数据，生成 HTML 内容并添加到容器中
         for (var i = 0; i < products.length; i++) {
           var product = products[i];
